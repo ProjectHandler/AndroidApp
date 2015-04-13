@@ -1,0 +1,18 @@
+<resources>
+
+    <style name="AppTheme" parent="@style/MaterialDesignLibraryTheme.Light">
+        <item name="android:colorButtonNormal">#98cc53</item>
+        <item name="colorPrimary">#1a7fc3</item>
+        <item name="colorPrimaryDark">#0071bc</item>
+        <item name="colorAccent">#98cc53</item>
+        <item name="colorControlNormal">#98cc53</item>
+        <item name="colorControlActivated">#ff66944a</item>
+        <item name="colorButtonNormal">#98cc53</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@android:color/white</item>
+    </style>
+
+</resources>

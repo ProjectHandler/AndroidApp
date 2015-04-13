@@ -1,0 +1,6 @@
+<resources>
+
+    <dimen name="global_padding">64dp</dimen>
+    <dimen name="global_margin">64dp</dimen>
+
+</resources>

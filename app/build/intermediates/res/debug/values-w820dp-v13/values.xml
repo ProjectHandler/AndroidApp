@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/D:/Project_Handler/ProjectHandler/app/src/main/res/values-w820dp/dimens.xml -->
+    <eat-comment/>
+    <dimen name="global_margin">64dp</dimen>
+    <dimen name="global_padding">64dp</dimen>
+</resources>
