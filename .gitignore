@@ -1,0 +1,11 @@
+build/
+
+*.class
+bin/
+gen/
+local.properties
+proguard/
+*.iml
+.idea/
+.gradle/
+app/build/
