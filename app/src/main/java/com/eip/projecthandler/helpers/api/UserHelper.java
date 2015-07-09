@@ -1,6 +1,6 @@
 package com.eip.projecthandler.helpers.api;
 
-import com.eip.projecthandler.models.User;
+import com.eip.projecthandler.models.Token;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,12 +12,12 @@ public class UserHelper {
      *
      * @return The list of users received from the server.
      */
-    public static Set<User> getUsers() {
-        Set<User> users = new HashSet<>();
+    public static Set<Token> getUsers() {
+        Set<Token> tokens = new HashSet<>();
 
         // call API
 
-        return users;
+        return tokens;
     }
 
 }

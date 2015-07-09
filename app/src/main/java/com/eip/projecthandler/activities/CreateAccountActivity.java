@@ -81,7 +81,8 @@ public class CreateAccountActivity extends AccountAuthenticatorActivity
         String emailAddress = mEmailAddressTextView.getText().toString();
         String password = mPasswordTextView.getText().toString();
 
-        if (checkCredentials(emailAddress, password)) authenticate(emailAddress, password);
+        if (checkCredentials(emailAddress, password))
+            authenticate(emailAddress, password);
     }
 
     /**
@@ -115,7 +116,9 @@ public class CreateAccountActivity extends AccountAuthenticatorActivity
      */
     private void authenticate(String emailAddress, String password) {
         hideForm();
-        AuthenticationHelper.authenticate(this, this, emailAddress, password);
+        // AuthenticationHelper.authenticate(this, this, emailAddress, password);
+        AuthenticationHelper ah = new AuthenticationHelper(this, emailAddress, password);
+        ah.authenticate();
     }
 
     /**

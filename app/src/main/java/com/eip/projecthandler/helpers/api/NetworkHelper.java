@@ -19,20 +19,20 @@ import java.util.Map;
 
 public class NetworkHelper {
 
-    private static NetworkHelper instance;
-    private final RequestQueue mRequestQueue;
-    private String mAuthToken;
+        private static NetworkHelper instance;
+        private final RequestQueue mRequestQueue;
+        private String mAuthToken;
 
-    private NetworkHelper(Context context) {
-        mRequestQueue = Volley.newRequestQueue(context);
-    }
+        private NetworkHelper(Context context) {
+            mRequestQueue = Volley.newRequestQueue(context);
+        }
 
-    /**
-     * Get the NetworkHelper instance.
-     *
-     * @param context The context.
-     * @return The NetworkHelper instance.
-     */
+        /**
+         * Get the NetworkHelper instance.
+         *
+         * @param context The context.
+         * @return The NetworkHelper instance.
+         */
     public static NetworkHelper getInstance(Context context) {
         if (instance == null) instance = new NetworkHelper(context);
         return instance;

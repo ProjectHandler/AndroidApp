@@ -4,6 +4,7 @@ import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +61,9 @@ public class LogInActivity extends AccountAuthenticatorActivity implements LogIn
             data.putString(AccountManager.KEY_AUTHTOKEN, authToken);
             data.putString(AuthenticatorConstants.AUTH_TOKEN_TYPE, authTokenType);
             data.putString(AuthenticatorConstants.ACCOUNT_PASSWORD, password);
+
+
+            Log.d("LogInActivity", "authToken: " + authToken);
 
             Intent intent = new Intent();
             intent.putExtras(data);
@@ -131,7 +135,9 @@ public class LogInActivity extends AccountAuthenticatorActivity implements LogIn
      */
     private void authenticate(String emailAddress, String password) {
         hideForm();
-        AuthenticationHelper.authenticate(this, this, emailAddress, password);
+
+        AuthenticationHelper ah = new AuthenticationHelper(this, emailAddress, password);
+        ah.authenticate();
     }
 
     /**
