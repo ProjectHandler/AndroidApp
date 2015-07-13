@@ -2,8 +2,7 @@ package com.eip.projecthandler.listeners;
 
 public interface LogInListener {
 
-    void onLogInSuccess(String emailAddress, String password, String authToken);
+    void onAuthenticationSuccess(String emailAddress, String password, String authToken);
 
-    void onLogInError(String error);
-
+    void onAuthenticationError(String error);
 }

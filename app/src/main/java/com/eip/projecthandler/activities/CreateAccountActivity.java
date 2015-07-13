@@ -41,7 +41,7 @@ public class CreateAccountActivity extends AccountAuthenticatorActivity
     }
 
     @Override
-    public void onLogInSuccess(String emailAddress, String password, String authToken) {
+    public void onAuthenticationSuccess(String emailAddress, String password, String authToken) {
         String accountType = getIntent().getStringExtra(AccountManager.KEY_ACCOUNT_TYPE);
         String authTokenType = getIntent().getStringExtra(AuthenticatorConstants.AUTH_TOKEN_TYPE);
 
@@ -66,7 +66,7 @@ public class CreateAccountActivity extends AccountAuthenticatorActivity
     }
 
     @Override
-    public void onLogInError(String error) {
+    public void onAuthenticationError(String error) {
         showForm();
         Toast.makeText(getBaseContext(), error, Toast.LENGTH_SHORT).show();
     }
@@ -116,9 +116,7 @@ public class CreateAccountActivity extends AccountAuthenticatorActivity
      */
     private void authenticate(String emailAddress, String password) {
         hideForm();
-        // AuthenticationHelper.authenticate(this, this, emailAddress, password);
-        AuthenticationHelper ah = new AuthenticationHelper(this, emailAddress, password);
-        ah.authenticate();
+        AuthenticationHelper.authenticate(this, this, emailAddress, password);
     }
 
     /**

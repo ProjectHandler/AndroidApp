@@ -4,7 +4,6 @@ import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,7 +45,7 @@ public class LogInActivity extends AccountAuthenticatorActivity implements LogIn
     }
 
     @Override
-    public void onLogInSuccess(String emailAddress, String password, String authToken) {
+    public void onAuthenticationSuccess(String emailAddress, String password, String authToken) {
         if (mHasAccount) AccountHelper.setPassword(this, mAccount, password);
         else {
             String accountType = getIntent().getStringExtra(AccountManager.KEY_ACCOUNT_TYPE);
@@ -62,9 +61,6 @@ public class LogInActivity extends AccountAuthenticatorActivity implements LogIn
             data.putString(AuthenticatorConstants.AUTH_TOKEN_TYPE, authTokenType);
             data.putString(AuthenticatorConstants.ACCOUNT_PASSWORD, password);
 
-
-            Log.d("LogInActivity", "authToken: " + authToken);
-
             Intent intent = new Intent();
             intent.putExtras(data);
 
@@ -78,7 +74,7 @@ public class LogInActivity extends AccountAuthenticatorActivity implements LogIn
     }
 
     @Override
-    public void onLogInError(String error) {
+    public void onAuthenticationError(String error) {
         showForm();
         Toast.makeText(getBaseContext(), error, Toast.LENGTH_SHORT).show();
     }
@@ -135,9 +131,7 @@ public class LogInActivity extends AccountAuthenticatorActivity implements LogIn
      */
     private void authenticate(String emailAddress, String password) {
         hideForm();
-
-        AuthenticationHelper ah = new AuthenticationHelper(this, emailAddress, password);
-        ah.authenticate();
+        AuthenticationHelper.authenticate(this, this, emailAddress, password);
     }
 
     /**

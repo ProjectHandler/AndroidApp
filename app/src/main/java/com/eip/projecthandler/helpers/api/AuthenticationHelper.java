@@ -1,20 +1,20 @@
 package com.eip.projecthandler.helpers.api;
 
 import android.content.Context;
-import android.util.Log;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.eip.projecthandler.R;
 import com.eip.projecthandler.helpers.account.AccountHelper;
 import com.eip.projecthandler.listeners.LogInListener;
 import com.eip.projecthandler.listeners.LogOutListener;
+import com.eip.projecthandler.listeners.NetworkListener;
 import com.eip.projecthandler.models.Account;
-import com.eip.projecthandler.models.Token;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public final class AuthenticationHelper {
-
-    private static final MyAsyncTask asyncTask = new MyAsyncTask();
-    private static String emailAddress;
-    private static String password;
-    private static LogInListener logInListener;
 
     /**
      * Logs in the user.
@@ -25,23 +25,30 @@ public final class AuthenticationHelper {
      * @param emailAddress  The user email address.
      * @param password      The user password.
      */
+    public static void authenticate(final Context context,
+                                    final LogInListener logInListener,
+                                    final String emailAddress,
+                                    final String password) {
+        NetworkHelper.getInstance(context).requestServer(new NetworkListener() {
 
-    public AuthenticationHelper(final LogInListener logInListener,
-                                final String emailAddress,
-                                final String password) {
-        this.asyncTask.delegate = this;
-        this.logInListener = logInListener;
-        this.emailAddress = emailAddress;
-        this.password = password;
-    }
+            @Override
+            public void onCallSuccess(JSONObject result) {
+                try {
+                    String authToken = result.getString("token");
+                    NetworkHelper.getInstance(context).setAuthToken(authToken);
+                    logInListener.onAuthenticationSuccess(emailAddress, password, authToken);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    logInListener.onAuthenticationError(e.getMessage());
+                }
+            }
 
-    public static void authenticate() {
-        Token t = new Token();
-        try {
-            asyncTask.execute();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            @Override
+            public void onCallError(VolleyError error) {
+                logInListener.onAuthenticationError(error.getMessage());
+            }
+
+        }, Request.Method.GET, context.getString(R.string.server_address)+"/api/user/authenticate?email=" + emailAddress + "&password=" + password);
     }
 
     /**
@@ -56,8 +63,4 @@ public final class AuthenticationHelper {
         if (account != null) AccountHelper.removeAccount(context, account, logOutListener);
     }
 
-    public void processFinish(String output) {
-        Log.e("AuthenticationHelper", "result of get: " + output);
-        logInListener.onLogInSuccess(emailAddress, password, output);
-    }
 }
