@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
-import com.eip.projecthandler.R;
+import com.eip.projecthandler.constants.ApiRoutes;
 import com.eip.projecthandler.helpers.account.AccountHelper;
 import com.eip.projecthandler.listeners.LogInListener;
 import com.eip.projecthandler.listeners.LogOutListener;
@@ -48,7 +48,7 @@ public final class AuthenticationHelper {
                 logInListener.onAuthenticationError(error.getMessage());
             }
 
-        }, Request.Method.GET, context.getString(R.string.server_address)+"/api/user/authenticate?email=" + emailAddress + "&password=" + password);
+        }, Request.Method.GET,  ApiRoutes.SERVER_DEV+"/api/user/authenticate?email=" + emailAddress + "&password=" + password);
     }
 
     /**

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.eip.projecthandler.R;
+import com.eip.projecthandler.constants.AuthenticatorConstants;
 import com.eip.projecthandler.listeners.LogOutListener;
 import com.eip.projecthandler.models.Account;
 
@@ -60,10 +61,11 @@ public class AccountHelper {
      * @param context The context.
      * @param account The account to add.
      */
-    public static void addAccount(Context context, Account account) {
+    public static void addAccount(Context context, Account account, String token) {
         AccountManager accountManager = AccountManager.get(context);
         accountManager.addAccountExplicitly(account, account.getPassword(), null);
-//        accountManager.setAuthToken(account, authTokenType, authToken);
+        //accountManager.setAuthToken(account, authTokenType, authToken);
+        accountManager.setAuthToken(account, AuthenticatorConstants.AUTH_TOKEN_TYPE, token);
     }
 
     /**

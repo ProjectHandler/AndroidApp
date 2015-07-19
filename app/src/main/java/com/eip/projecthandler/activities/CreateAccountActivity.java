@@ -59,7 +59,7 @@ public class CreateAccountActivity extends AccountAuthenticatorActivity
 
         Account account = new Account(emailAddress, accountType);
         account.setPassword(password);
-        AccountHelper.addAccount(this, account);
+        AccountHelper.addAccount(this, account, authToken);
         setAccountAuthenticatorResult(data);
         setResult(RESULT_OK, intent);
         finish();

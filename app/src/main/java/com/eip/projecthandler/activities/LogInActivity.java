@@ -66,7 +66,7 @@ public class LogInActivity extends AccountAuthenticatorActivity implements LogIn
 
             mAccount = new Account(emailAddress, accountType);
             mAccount.setPassword(password);
-            AccountHelper.addAccount(this, mAccount);
+            AccountHelper.addAccount(this, mAccount, authToken);
         }
 
         HomeActivity.start(this);

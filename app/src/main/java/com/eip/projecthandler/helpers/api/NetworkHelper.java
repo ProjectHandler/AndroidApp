@@ -12,6 +12,7 @@ import com.android.volley.toolbox.Volley;
 import com.eip.projecthandler.exceptions.AuthenticationException;
 import com.eip.projecthandler.listeners.NetworkListener;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -47,6 +48,8 @@ public class NetworkHelper {
         mAuthToken = authToken;
     }
 
+    public String getAuthToken() { return this.mAuthToken; }
+
     /**
      * Calls the server.
      * Will call back LogInListener.onAuthenticateSuccess
@@ -68,7 +71,11 @@ public class NetworkHelper {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        if (networkListener != null) networkListener.onCallSuccess(response);
+                        if (networkListener != null) try {
+                            networkListener.onCallSuccess(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                 },
@@ -96,12 +103,17 @@ public class NetworkHelper {
     private void requestServerWithToken(final NetworkListener networkListener,
                                         int method,
                                         String url) {
+        url = url + "?token=" + mAuthToken;
         JsonObjectRequest request = new JsonObjectRequest(method, url,
                 new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        if (networkListener != null) networkListener.onCallSuccess(response);
+                        if (networkListener != null) try {
+                            networkListener.onCallSuccess(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                 },
@@ -118,7 +130,7 @@ public class NetworkHelper {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("Authentication", mAuthToken);
+                params.put("token", mAuthToken);
                 return params;
             }
 
