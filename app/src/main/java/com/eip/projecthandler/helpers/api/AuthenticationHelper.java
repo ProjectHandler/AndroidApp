@@ -8,7 +8,7 @@ import com.eip.projecthandler.constants.ApiRoutes;
 import com.eip.projecthandler.helpers.account.AccountHelper;
 import com.eip.projecthandler.listeners.LogInListener;
 import com.eip.projecthandler.listeners.LogOutListener;
-import com.eip.projecthandler.listeners.NetworkListener;
+import com.eip.projecthandler.listeners.ObejctNetworkListener;
 import com.eip.projecthandler.models.Account;
 
 import org.json.JSONException;
@@ -29,7 +29,7 @@ public final class AuthenticationHelper {
                                     final LogInListener logInListener,
                                     final String emailAddress,
                                     final String password) {
-        NetworkHelper.getInstance(context).requestServer(new NetworkListener() {
+        NetworkHelper.getInstance(context).objectRequestServer(new ObejctNetworkListener() {
 
             @Override
             public void onCallSuccess(JSONObject result) {
@@ -48,7 +48,7 @@ public final class AuthenticationHelper {
                 logInListener.onAuthenticationError(error.getMessage());
             }
 
-        }, Request.Method.GET,  ApiRoutes.SERVER_DEV+"/api/user/authenticate?email=" + emailAddress + "&password=" + password);
+        }, Request.Method.GET, ApiRoutes.authentication(emailAddress, password));
     }
 
     /**

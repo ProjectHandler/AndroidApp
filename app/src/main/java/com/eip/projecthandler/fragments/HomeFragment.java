@@ -17,13 +17,11 @@ import com.eip.projecthandler.constants.AuthenticatorConstants;
 import com.eip.projecthandler.helpers.account.AccountAuthenticator;
 import com.eip.projecthandler.helpers.account.AccountHelper;
 import com.eip.projecthandler.helpers.api.NetworkHelper;
-import com.eip.projecthandler.listeners.NetworkListener;
+import com.eip.projecthandler.listeners.ObejctNetworkListener;
 import com.eip.projecthandler.models.Account;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.net.URL;
 
 public class HomeFragment extends Fragment {
 
@@ -43,11 +41,8 @@ public class HomeFragment extends Fragment {
         //tv_test.setText(in.toString());
         try {
             //Gets an auth token of the specified type for a particular account, prompting the user for credentials if necessary.
-            URL url = new URL(ApiRoutes.SERVER_DEV+"/api/user/get/12?token=");
+            //URL url = new URL(ApiRoutes.SERVER_DEV+"/api/user/get/12?token=");
             String token = null;
-
-           // AccountManager accMgr = AccountManager.get(getActivity());
-            //AccountHelper.getAccount(getActivity());
 
             AccountAuthenticator aAuth = new AccountAuthenticator(getActivity());
             Account acc = AccountHelper.getAccount(getActivity());
@@ -63,7 +58,7 @@ public class HomeFragment extends Fragment {
             NetworkHelper n = NetworkHelper.getInstance(getActivity());
             //n.setAuthToken("402445ca-2650-46ee-be9d-a906dab09c63");
             n.setAuthToken(token);
-            n.requestServer(new NetworkListener() {
+            n.objectRequestServer(new ObejctNetworkListener() {
                 @Override
                 public void onCallSuccess(JSONObject result) throws JSONException {
                     Log.d("HomeFragment", "requestServer success, result: " + result.toString());
@@ -76,7 +71,7 @@ public class HomeFragment extends Fragment {
                     Log.d("HomeFragment", "requestServer Error: " + error);
                     error.printStackTrace();
                 }
-            }, Request.Method.GET, ApiRoutes.SERVER_DEV + "/api/user/get/51");
+            }, Request.Method.GET, ApiRoutes.SERVER() + "/user/get/51");
 
 
         } catch (Exception e) {

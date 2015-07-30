@@ -7,11 +7,14 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.eip.projecthandler.exceptions.AuthenticationException;
-import com.eip.projecthandler.listeners.NetworkListener;
+import com.eip.projecthandler.listeners.ArrayNetworkListener;
+import com.eip.projecthandler.listeners.ObejctNetworkListener;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,20 +23,20 @@ import java.util.Map;
 
 public class NetworkHelper {
 
-        private static NetworkHelper instance;
-        private final RequestQueue mRequestQueue;
-        private String mAuthToken;
+    private static NetworkHelper instance;
+    private final RequestQueue mRequestQueue;
+    private String mAuthToken;
 
-        private NetworkHelper(Context context) {
-            mRequestQueue = Volley.newRequestQueue(context);
-        }
+    private NetworkHelper(Context context) {
+        mRequestQueue = Volley.newRequestQueue(context);
+    }
 
-        /**
-         * Get the NetworkHelper instance.
-         *
-         * @param context The context.
-         * @return The NetworkHelper instance.
-         */
+    /**
+     * Get the NetworkHelper instance.
+     *
+     * @param context The context.
+     * @return The NetworkHelper instance.
+     */
     public static NetworkHelper getInstance(Context context) {
         if (instance == null) instance = new NetworkHelper(context);
         return instance;
@@ -48,21 +51,23 @@ public class NetworkHelper {
         mAuthToken = authToken;
     }
 
-    public String getAuthToken() { return this.mAuthToken; }
+    public String getAuthToken() {
+        return this.mAuthToken;
+    }
 
     /**
      * Calls the server.
      * Will call back LogInListener.onAuthenticateSuccess
      * or LogInListener.onAuthenticateError.
      *
-     * @param networkListener The network listener.
+     * @param obejctNetworkListener The network listener.
      * @param method          The method used. Must be like Request.Method.?
      * @param url             The url.
      * @throws AuthenticationException
      */
-    public void requestServer(final NetworkListener networkListener, int method, String url) {
+    public void objectRequestServer(final ObejctNetworkListener obejctNetworkListener, int method, String url) {
         if (!TextUtils.isEmpty(mAuthToken)) {
-            requestServerWithToken(networkListener, method, url);
+            objectRequestServerWithToken(obejctNetworkListener, method, url);
             return;
         }
 
@@ -71,8 +76,8 @@ public class NetworkHelper {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        if (networkListener != null) try {
-                            networkListener.onCallSuccess(response);
+                        if (obejctNetworkListener != null) try {
+                            obejctNetworkListener.onCallSuccess(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -83,7 +88,7 @@ public class NetworkHelper {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        if (networkListener != null) networkListener.onCallError(error);
+                        if (obejctNetworkListener != null) obejctNetworkListener.onCallError(error);
                     }
 
                 });
@@ -95,22 +100,22 @@ public class NetworkHelper {
      * Will call back LogInListener.onAuthenticateSuccess
      * or LogInListener.onAuthenticateError.
      *
-     * @param networkListener The network listener.
+     * @param obejctNetworkListener The network listener.
      * @param method          The method used. Must be like Request.Method.?
      * @param url             The url.
      * @throws AuthenticationException
      */
-    private void requestServerWithToken(final NetworkListener networkListener,
-                                        int method,
-                                        String url) {
+    private void objectRequestServerWithToken(final ObejctNetworkListener obejctNetworkListener,
+                                              int method,
+                                              String url) {
         url = url + "?token=" + mAuthToken;
         JsonObjectRequest request = new JsonObjectRequest(method, url,
                 new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        if (networkListener != null) try {
-                            networkListener.onCallSuccess(response);
+                        if (obejctNetworkListener != null) try {
+                            obejctNetworkListener.onCallSuccess(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -121,7 +126,7 @@ public class NetworkHelper {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        if (networkListener != null) networkListener.onCallError(error);
+                        if (obejctNetworkListener != null) obejctNetworkListener.onCallError(error);
                     }
 
                 }
@@ -138,4 +143,58 @@ public class NetworkHelper {
         mRequestQueue.add(request);
     }
 
+    public void arrayRequestServer(final ArrayNetworkListener arrayNetworkListener, int method, String url) {
+        if (!TextUtils.isEmpty(mAuthToken)) {
+            arrayRequestServerWithToken(arrayNetworkListener, method, url);
+            return;
+        }
+        JsonArrayRequest request = new JsonArrayRequest(method, url,
+                new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        if (arrayNetworkListener != null) try {
+                            arrayNetworkListener.onCallSuccess(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (arrayNetworkListener != null) arrayNetworkListener.onCallError(error);
+                    }
+
+                });
+        mRequestQueue.add(request);
+    }
+
+    private void arrayRequestServerWithToken(final ArrayNetworkListener arrayNetworkListener,
+                                             int method,
+                                             String url) {
+        url = url + "?token=" + mAuthToken;
+        JsonArrayRequest request = new JsonArrayRequest(method, url,
+                new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        if (arrayNetworkListener != null) try {
+                            arrayNetworkListener.onCallSuccess(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (arrayNetworkListener != null) arrayNetworkListener.onCallError(error);
+                    }
+
+                });
+        mRequestQueue.add(request);
+    }
 }
