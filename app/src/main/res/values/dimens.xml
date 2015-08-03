@@ -3,23 +3,4 @@
     <dimen name="global_padding">16dp</dimen>
     <dimen name="global_margin">16dp</dimen>
 
-
-    <!-- TextView -->
-    <dimen name="textview_size">17sp</dimen>
-
-    <!-- ListView -->
-    <dimen name="listview_row_height">56dp</dimen>
-    <dimen name="listview_row_header_padding_vertical">20dp</dimen>
-    <dimen name="listview_row_header_padding_horizontal">32dp</dimen>
-    <dimen name="listview_row_header_size">22sp</dimen>
-    <dimen name="listview_row_title_padding">32dp</dimen>
-    <dimen name="listview_row_title_size">16sp</dimen>
-    <dimen name="listview_row_description_padding">32dp</dimen>
-    <dimen name="listview_row_description_size">15sp</dimen>
-
-    <!-- ScrollView -->
-    <dimen name="scrollview_padding">32dp</dimen>
-
-    <!-- CardView -->
-    <dimen name="cardview_margin_horizontal">32dp</dimen>
 </resources>
