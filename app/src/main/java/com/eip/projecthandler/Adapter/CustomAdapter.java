@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.eip.projecthandler.R;
+import com.eip.projecthandler.helpers.util;
 import com.eip.projecthandler.models.Project;
 
 import java.util.List;
@@ -44,14 +45,10 @@ public class CustomAdapter extends BaseAdapter {
 
     /* private view holder class */
     private class ViewHolder {
-        //ImageView profile_pic;
-        //TextView member_name;
-        //TextView status;
-        //TextView contactType;
-
-        TextView idName;
+        TextView name;
         TextView description;
-
+        TextView date_end;
+        TextView progress;
     }
 
     @Override
@@ -67,15 +64,18 @@ public class CustomAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.list_item, null);
             holder = new ViewHolder();
 
-            holder.idName = (TextView) convertView
-                    .findViewById(R.id.name);
-            holder.description = (TextView) convertView
-                    .findViewById(R.id.description);
+            holder.name = (TextView) convertView.findViewById(R.id.name);
+            holder.description = (TextView) convertView.findViewById(R.id.description);
+            holder.date_end = (TextView) convertView.findViewById(R.id.date_end);
+            holder.progress = (TextView) convertView.findViewById(R.id.progress);
 
             Project row_pos = rowItems.get(position);
 
-            holder.idName.setText(row_pos.getName());
+            holder.name.setText(row_pos.getName());
             holder.description.setText(row_pos.getDescription());
+            //holder.date_end.setText(row_pos.getDateEnd().toString());
+            holder.date_end.setText(util.getDateString(context, row_pos.getDateEnd()));
+            holder.progress.setText(row_pos.getProgress().toString() + "%");
 
             convertView.setTag(holder);
         } else {

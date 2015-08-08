@@ -3,6 +3,8 @@ package com.eip.projecthandler.fragments;
 import android.accounts.NetworkErrorException;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -79,6 +81,18 @@ public class ProjectsFragment  extends com.blunderer.materialdesignlibrary.fragm
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        Project p = (Project) adapterView.getItemAtPosition(position);
+        Log.d("ProjectsFragment", "click item " + p.getName());
+        //open project
+        ProjectFragment pf = new ProjectFragment();
+        pf.setProject(p);
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.remove(this);
+        fragmentTransaction.add(R.id.fragment_container, pf);
+        fragmentTransaction.commit();
     }
 
     @Override
