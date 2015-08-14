@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Application -->
+    <string name="app_name">Project Handler</string>
+    <string name="app_package_name">com.eip.projecthandler</string>
+
+</resources>

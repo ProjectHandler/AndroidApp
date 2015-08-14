@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.eip.projecthandler.R;
@@ -26,6 +27,11 @@ public class ProjectFragment extends Fragment {
 
            TextView tv2 = (TextView) view.findViewById(R.id.tv_project_description);
            tv2.setText(project.getDescription());
+
+           ProgressBar pb_progress = (ProgressBar) view.findViewById(R.id.progressBar_project_progress);
+           pb_progress.setProgress(Integer.parseInt(project.getProgress().toString()));
+
+
        }
 
         return view;

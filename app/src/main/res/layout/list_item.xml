@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:padding="5dp"
+    android:background="@color/carbon_ripple_light">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/relativeLayout1"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/date_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/list_project_date"
+            android:text="@string/project_date_example"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:textSize="16sp"/>
@@ -25,35 +29,37 @@
             android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_toLeftOf="@+id/date_end"
-            android:text="@string/list_project_name"
+            android:text="@string/project_name_example"
             android:maxLines="1"
             android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/relativeLayout2"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/list_project_progress"
+            android:text="@string/project_progress_example"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:textSize="16sp"/>
 
         <TextView
             android:id="@+id/description"
-
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_toLeftOf="@+id/progress"
-            android:text="@string/list_project_description"
+            android:text="@string/project_description_example"
             android:maxLines="1"
             android:textSize="16sp"/>
     </RelativeLayout>

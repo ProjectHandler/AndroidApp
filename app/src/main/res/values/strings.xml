@@ -13,12 +13,20 @@
     <!-- Home Activity -->
     <string name="home">Home</string>
     <string name="log_out">Log out</string>
-
     <string name="projects">Projects</string>
 
-    <!-- list project item text example -->
-    <string name="list_project_name">Example name</string>
-    <string name="list_project_description">La paix est un mensonge. Seul la passion existe. Example description</string>
-    <string name="list_project_date">01/09/2015</string>
-    <string name="list_project_progress">33%</string>
+    <!-- Project -->
+    <string name="button_tasks">Tasks</string>
+    <string name="button_my_tasks">My tasks</string>
+    <string name="button_tickets">Tickets</string>
+    <string name="button_my_tickets">My Tickets</string>
+    <string name="label_project_progress">progress: </string>
+
+    <!-- project text example -->
+    <string name="project_name_example">Example name</string>
+    <string name="project_description_example">Example description</string>
+    <string name="project_date_example">01/09/2015</string>
+    <string name="project_progress_example">33%</string>
+
+
 </resources>
