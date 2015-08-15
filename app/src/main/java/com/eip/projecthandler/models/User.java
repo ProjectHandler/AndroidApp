@@ -2,10 +2,11 @@ package com.eip.projecthandler.models;
 
 public class User {
 
+    private Long id;
     private String civility;
     private String firstName;
     private String lastName;
-    private String password;
+   // private String password;
     private String userRole;
     private String email;
     private String phone;
@@ -13,6 +14,14 @@ public class User {
     private String accountStatus;
 
     public User() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCivility() {
@@ -39,13 +48,13 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
+    /*public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
+    }*/
 
     public String getUserRole() {
         return userRole;

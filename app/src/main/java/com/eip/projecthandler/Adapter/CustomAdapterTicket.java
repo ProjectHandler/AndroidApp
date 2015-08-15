@@ -5,16 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.blunderer.materialdesignlibrary.activities.Activity;
 import com.eip.projecthandler.R;
+import com.eip.projecthandler.helpers.util;
 import com.eip.projecthandler.models.Ticket;
 
 import java.util.List;
 
-/**
- * Created by Zululu on 15/08/2015.
- */
 public class CustomAdapterTicket extends BaseAdapter {
 
     Context context;
@@ -46,10 +45,10 @@ public class CustomAdapterTicket extends BaseAdapter {
 
     /* private view holder class */
     private class ViewHolder {
-        /*TextView name;
-        TextView description;
-        TextView date_end;
-        TextView progress;*/
+        TextView title;
+        TextView status;
+        TextView priority;
+        TextView updatedAt;
     }
 
     @Override
@@ -62,23 +61,23 @@ public class CustomAdapterTicket extends BaseAdapter {
 
         if (convertView == null) {
 
-            convertView = mInflater.inflate(R.layout.project_item, null);
+            convertView = mInflater.inflate(R.layout.ticket_item, null);
             holder = new ViewHolder();
 
-            /*holder.name = (TextView) convertView.findViewById(R.id.name);
-            holder.description = (TextView) convertView.findViewById(R.id.description);
-            holder.date_end = (TextView) convertView.findViewById(R.id.date_end);
-            holder.progress = (TextView) convertView.findViewById(R.id.progress);
+            holder.title = (TextView) convertView.findViewById(R.id.title);
+            holder.status = (TextView) convertView.findViewById(R.id.status);
+            holder.priority = (TextView) convertView.findViewById(R.id.priority);
+            holder.updatedAt = (TextView) convertView.findViewById(R.id.updatedAt);
 
-            Project row_pos = rowItems.get(position);
+            Ticket row_pos = rowItems.get(position);
 
-            holder.name.setText(row_pos.getName());
-            holder.description.setText(row_pos.getDescription());
-            //holder.date_end.setText(row_pos.getDateEnd().toString());
-            holder.date_end.setText(util.getDateString(context, row_pos.getDateEnd()));
-            holder.progress.setText(row_pos.getProgress().toString() + "%");
+            holder.title.setText(row_pos.getTitle());
+            holder.status.setText(row_pos.getTicketStatus().getValue());
+            holder.priority.setText(row_pos.getTicketPriority().getValue());
+            holder.updatedAt.setText(util.getDateString(context, row_pos.getUpdatedAt()));
 
-            convertView.setTag(holder);*/
+            convertView.setTag(holder);
+
         } else {
             holder = (ViewHolder) convertView.getTag();
         }

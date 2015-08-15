@@ -24,6 +24,10 @@ public class ApiRoutes {
     }
 
     // Projects
-    public static final String PROJECT_GET = SERVER() + "/project/all";
+    public static final String PROJECT_GET_BY_USER = SERVER() + "/project/allByUser";
+
+    // Tickets
+    //public static final String TICKET_GET_ALL = SERVER() + "/ticket/all";
+    public static final String TICKET_GET_BY_USER = SERVER() + "/ticket/allByUser";
 
 }

@@ -12,7 +12,7 @@ import android.widget.ListAdapter;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
-import com.eip.projecthandler.Adapter.CustomAdapterProject;
+import com.eip.projecthandler.Adapter.CustomAdapterTicket;
 import com.eip.projecthandler.R;
 import com.eip.projecthandler.constants.ApiRoutes;
 import com.eip.projecthandler.constants.AuthenticatorConstants;
@@ -21,7 +21,7 @@ import com.eip.projecthandler.helpers.account.AccountHelper;
 import com.eip.projecthandler.helpers.api.NetworkHelper;
 import com.eip.projecthandler.listeners.ArrayNetworkListener;
 import com.eip.projecthandler.models.Account;
-import com.eip.projecthandler.models.Project;
+import com.eip.projecthandler.models.Ticket;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -30,17 +30,18 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectsFragment  extends com.blunderer.materialdesignlibrary.fragments.ListViewFragment {
+public class ListTicketFragment extends com.blunderer.materialdesignlibrary.fragments.ListViewFragment {
 
-    private List<Project> projects;
-    private CustomAdapterProject adapter;
+    private List<Ticket> listTickets;
+    private CustomAdapterTicket ticketAdapter;
 
     @Override
     public ListAdapter getListAdapter() {
-        projects = new ArrayList<Project>();
-        adapter = new CustomAdapterProject(getActivity(), projects);
-        mListView.setAdapter(adapter);
-        getProject();
+        listTickets = new ArrayList<Ticket>();
+        ticketAdapter = new CustomAdapterTicket(getActivity(), listTickets);
+        mListView.setAdapter(ticketAdapter);
+
+        getListOfTicket();
         return mListView.getAdapter();
     }
 
@@ -78,17 +79,15 @@ public class ProjectsFragment  extends com.blunderer.materialdesignlibrary.fragm
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        Project p = (Project) adapterView.getItemAtPosition(position);
-        Log.d("ProjectsFragment", "click item " + p.getName());
-        //open project
-        ProjectFragment pf = new ProjectFragment();
-        pf.setProject(p);
+        Ticket ticket = (Ticket) adapterView.getItemAtPosition(position);
+        TicketFragment ticketFragment = new TicketFragment();
+        ticketFragment.setTicket(ticket);
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.remove(this);
-        fragmentTransaction.add(R.id.fragment_container, pf);
+        fragmentTransaction.add(R.id.fragment_container, ticketFragment);
         fragmentTransaction.commit();
     }
 
@@ -97,45 +96,43 @@ public class ProjectsFragment  extends com.blunderer.materialdesignlibrary.fragm
         return false;
     }
 
-    private void getProject() {
+    private void getListOfTicket() {
         try {
             String token = null;
             AccountAuthenticator aAuth = new AccountAuthenticator(getActivity());
             Account acc = AccountHelper.getAccount(getActivity());
             try {
-                Bundle b = aAuth.getAuthToken(null, acc, AuthenticatorConstants.AUTH_TOKEN_TYPE, null);
-                token = (String) b.get("authtoken");
-                Log.d("ProjectsFragment", "requestServer success, token: " + token);
+                Bundle bundle = aAuth.getAuthToken(null, acc, AuthenticatorConstants.AUTH_TOKEN_TYPE, null);
+                token = (String) bundle.get("authtoken");
             } catch (NetworkErrorException e) {
                 e.printStackTrace();
             }
 
-            NetworkHelper n = NetworkHelper.getInstance(getActivity());
-            n.setAuthToken(token);
-            n.arrayRequestServer(new ArrayNetworkListener() {
+            NetworkHelper networkHelper = NetworkHelper.getInstance(getActivity());
+            networkHelper.setAuthToken(token);
+            networkHelper.arrayRequestServer(new ArrayNetworkListener() {
 
                 @Override
                 public void onCallSuccess(JSONArray result) throws JSONException {
-                    Log.d("ProjectsFragment", "requestServer success, result: " + result.toString());
+                    Log.d("ListTicketFragment", "requestServer ok result: " + result);
                     Gson gson = new Gson();
-                    projects.clear();
+                    listTickets.clear();
                     for (int i = 0; i < result.length(); i++) {
-                        Project p = gson.fromJson(result.getJSONObject(i).toString(), Project.class);
-                        projects.add(p);
+                        Ticket ticket = gson.fromJson(result.getJSONObject(i).toString(), Ticket.class);
+                        listTickets.add(ticket);
                     }
-                    adapter.notifyDataSetChanged();
+                    ticketAdapter.notifyDataSetChanged();
                 }
 
                 @Override
                 public void onCallError(VolleyError error) {
-                    Log.d("ProjectsFragment", "requestServer Error: " + error);
+                    Log.d("ListTicketFragment", "requestServer 42 Error: " + error);
                     error.printStackTrace();
                 }
-            }, Request.Method.GET, ApiRoutes.PROJECT_GET);
+            }, Request.Method.GET, ApiRoutes.TICKET_GET_BY_USER);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
