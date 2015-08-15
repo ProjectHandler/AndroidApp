@@ -14,12 +14,12 @@ import com.eip.projecthandler.models.Project;
 
 import java.util.List;
 
-public class CustomAdapter extends BaseAdapter {
+public class CustomAdapterProject extends BaseAdapter {
 
     Context context;
     List<Project> rowItems;
 
-    public CustomAdapter(Context context, List<Project> rowItems) {
+    public CustomAdapterProject(Context context, List<Project> rowItems) {
         this.context = context;
         this.rowItems = rowItems;
     }
@@ -61,7 +61,7 @@ public class CustomAdapter extends BaseAdapter {
 
         if (convertView == null) {
 
-            convertView = mInflater.inflate(R.layout.list_item, null);
+            convertView = mInflater.inflate(R.layout.project_item, null);
             holder = new ViewHolder();
 
             holder.name = (TextView) convertView.findViewById(R.id.name);

@@ -1,46 +1,29 @@
 package com.eip.projecthandler.fragments;
 
-import android.accounts.NetworkErrorException;
-import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 
-import com.android.volley.Request;
-import com.android.volley.VolleyError;
-import com.eip.projecthandler.Adapter.CustomAdapterProject;
+import com.eip.projecthandler.Adapter.CustomAdapterTicket;
 import com.eip.projecthandler.R;
-import com.eip.projecthandler.constants.ApiRoutes;
-import com.eip.projecthandler.constants.AuthenticatorConstants;
-import com.eip.projecthandler.helpers.account.AccountAuthenticator;
-import com.eip.projecthandler.helpers.account.AccountHelper;
-import com.eip.projecthandler.helpers.api.NetworkHelper;
-import com.eip.projecthandler.listeners.ArrayNetworkListener;
-import com.eip.projecthandler.models.Account;
-import com.eip.projecthandler.models.Project;
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
+import com.eip.projecthandler.models.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectsFragment  extends com.blunderer.materialdesignlibrary.fragments.ListViewFragment {
+public class TicketsFragment  extends com.blunderer.materialdesignlibrary.fragments.ListViewFragment {
 
-    private List<Project> projects;
-    private CustomAdapterProject adapter;
+    private List<Ticket> tickets;
+    private CustomAdapterTicket adapter;
 
     @Override
     public ListAdapter getListAdapter() {
-        projects = new ArrayList<Project>();
-        adapter = new CustomAdapterProject(getActivity(), projects);
+        tickets = new ArrayList<Ticket>();
+        adapter = new CustomAdapterTicket(getActivity(), tickets);
         mListView.setAdapter(adapter);
-        getProject();
+
+        //getProject();
         return mListView.getAdapter();
     }
 
@@ -78,7 +61,7 @@ public class ProjectsFragment  extends com.blunderer.materialdesignlibrary.fragm
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        Project p = (Project) adapterView.getItemAtPosition(position);
+        /*Project p = (Project) adapterView.getItemAtPosition(position);
         Log.d("ProjectsFragment", "click item " + p.getName());
         //open project
         ProjectFragment pf = new ProjectFragment();
@@ -89,7 +72,7 @@ public class ProjectsFragment  extends com.blunderer.materialdesignlibrary.fragm
 
         fragmentTransaction.remove(this);
         fragmentTransaction.add(R.id.fragment_container, pf);
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
     }
 
     @Override
@@ -97,7 +80,7 @@ public class ProjectsFragment  extends com.blunderer.materialdesignlibrary.fragm
         return false;
     }
 
-    private void getProject() {
+    /*private void getProject() {
         try {
             String token = null;
             AccountAuthenticator aAuth = new AccountAuthenticator(getActivity());
@@ -136,6 +119,5 @@ public class ProjectsFragment  extends com.blunderer.materialdesignlibrary.fragm
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
+    }*/
 }

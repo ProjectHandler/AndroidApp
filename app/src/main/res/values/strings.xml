@@ -14,6 +14,7 @@
     <string name="home">Home</string>
     <string name="log_out">Log out</string>
     <string name="projects">Projects</string>
+    <string name="tickets">My tickets</string>
 
     <!-- Project -->
     <string name="button_tasks">Tasks</string>
