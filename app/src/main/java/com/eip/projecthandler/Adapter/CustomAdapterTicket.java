@@ -72,8 +72,17 @@ public class CustomAdapterTicket extends BaseAdapter {
             Ticket row_pos = rowItems.get(position);
 
             holder.title.setText(row_pos.getTitle());
-            holder.status.setText(row_pos.getTicketStatus().getValue());
-            holder.priority.setText(row_pos.getTicketPriority().getValue());
+
+            if (row_pos.getTicketStatus() == null)
+                holder.status.setText("");
+            else
+                holder.status.setText(row_pos.getTicketStatus().getValue());
+
+            if (row_pos.getTicketPriority() == null)
+                holder.priority.setText("");
+            else
+                holder.priority.setText(row_pos.getTicketPriority().getValue());
+
             holder.updatedAt.setText(util.getDateString(context, row_pos.getUpdatedAt()));
 
             convertView.setTag(holder);

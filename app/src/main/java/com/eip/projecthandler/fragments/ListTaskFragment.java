@@ -12,7 +12,7 @@ import android.widget.ListAdapter;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
-import com.eip.projecthandler.Adapter.CustomAdapterTicket;
+import com.eip.projecthandler.Adapter.CustomAdapterTask;
 import com.eip.projecthandler.R;
 import com.eip.projecthandler.constants.ApiRoutes;
 import com.eip.projecthandler.constants.AuthenticatorConstants;
@@ -21,7 +21,7 @@ import com.eip.projecthandler.helpers.account.AccountHelper;
 import com.eip.projecthandler.helpers.api.NetworkHelper;
 import com.eip.projecthandler.listeners.ArrayNetworkListener;
 import com.eip.projecthandler.models.Account;
-import com.eip.projecthandler.models.Ticket;
+import com.eip.projecthandler.models.Task;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -30,20 +30,25 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListTicketFragment extends com.blunderer.materialdesignlibrary.fragments.ListViewFragment {
+public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragments.ListViewFragment {
 
-    private List<Ticket> listTickets;
-    private CustomAdapterTicket ticketAdapter;
+    private List<Task> listTasks;
+    private CustomAdapterTask taskAdapter;
+    private Long projectId;
+    private Boolean onlyUserTask = false;
 
     @Override
     public ListAdapter getListAdapter() {
-        listTickets = new ArrayList<Ticket>();
-        ticketAdapter = new CustomAdapterTicket(getActivity(), listTickets);
-        mListView.setAdapter(ticketAdapter);
+        listTasks = new ArrayList<Task>();
+        taskAdapter = new CustomAdapterTask(getActivity(), listTasks);
+        mListView.setAdapter(taskAdapter);
 
-        getListOfTicket();
+        getListOfTask();
+
+        Log.d("ListTaskFragment", "ListTaskFragment tasks !!!! projectid:" + projectId);
+
         return mListView.getAdapter();
-    }
+     }
 
     @Override
     public boolean useCustomContentView() {
@@ -68,7 +73,6 @@ public class ListTicketFragment extends com.blunderer.materialdesignlibrary.frag
     @Override
     public void onRefresh() {
         new Handler().postDelayed(new Runnable() {
-
             @Override
             public void run() {
                 //mAdapter.notifyDataSetChanged();
@@ -79,15 +83,15 @@ public class ListTicketFragment extends com.blunderer.materialdesignlibrary.frag
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        Ticket ticket = (Ticket) adapterView.getItemAtPosition(position);
-        TicketFragment ticketFragment = new TicketFragment();
-        ticketFragment.setTicket(ticket);
+        Task task = (Task) adapterView.getItemAtPosition(position);
+        TaskFragment taskFragment = new TaskFragment();
+        taskFragment.setTask(task);
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.remove(this);
-        fragmentTransaction.add(R.id.fragment_container, ticketFragment);
+        fragmentTransaction.add(R.id.fragment_container, taskFragment);
         fragmentTransaction.commit();
     }
 
@@ -96,7 +100,7 @@ public class ListTicketFragment extends com.blunderer.materialdesignlibrary.frag
         return false;
     }
 
-    private void getListOfTicket() {
+    private void getListOfTask() {
         try {
             String token = null;
             AccountAuthenticator aAuth = new AccountAuthenticator(getActivity());
@@ -108,27 +112,32 @@ public class ListTicketFragment extends com.blunderer.materialdesignlibrary.frag
                 e.printStackTrace();
             }
 
-            String url = ApiRoutes.TICKET_GET_BY_USER;
+            String url;
+            if (this.onlyUserTask)
+                url = ApiRoutes.TASK_GET_BY_PROJECT_AND_USER(this.projectId);
+            else
+                url = ApiRoutes.TASK_GET_BY_PROJECT(this.projectId);
 
+            Log.d("ListTaskFragment", "url: " + url);
             NetworkHelper networkHelper = NetworkHelper.getInstance(getActivity());
             networkHelper.setAuthToken(token);
             networkHelper.arrayRequestServer(new ArrayNetworkListener() {
 
                 @Override
                 public void onCallSuccess(JSONArray result) throws JSONException {
-                    Log.d("ListTicketFragment", "requestServer ok result: " + result);
+                    Log.d("ListTaskFragment", "requestServer ok result: " + result);
                     Gson gson = new Gson();
-                    listTickets.clear();
+                    listTasks.clear();
                     for (int i = 0; i < result.length(); i++) {
-                        Ticket ticket = gson.fromJson(result.getJSONObject(i).toString(), Ticket.class);
-                        listTickets.add(ticket);
+                        Task task = gson.fromJson(result.getJSONObject(i).toString(), Task.class);
+                        listTasks.add(task);
                     }
-                    ticketAdapter.notifyDataSetChanged();
+                    taskAdapter.notifyDataSetChanged();
                 }
 
                 @Override
                 public void onCallError(VolleyError error) {
-                    Log.d("ListTicketFragment", "requestServer 42 Error: " + error);
+                    Log.d("ListTaskFragment", "requestServer 42 Error: " + error);
                     error.printStackTrace();
                 }
             }, Request.Method.GET, url);
@@ -136,5 +145,21 @@ public class ListTicketFragment extends com.blunderer.materialdesignlibrary.frag
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public Long getProjectId() {
+        return this.projectId;
+    }
+
+    public Boolean getOnlyUserTask() {
+        return onlyUserTask;
+    }
+
+    public void setOnlyUserTask(Boolean onlyUserTask) {
+        this.onlyUserTask = onlyUserTask;
     }
 }

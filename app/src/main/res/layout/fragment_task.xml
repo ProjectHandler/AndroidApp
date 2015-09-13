@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_project_layout"
+    android:id="@+id/fragment_task_layout"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:background="@color/carbon_ripple_light">
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/name_example"
-            android:id="@+id/tv_project_name"
+            android:id="@+id/tv_task_name"
             android:paddingBottom="10dp"
             android:background="#0071BC"
             android:gravity="center_horizontal"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/description_example"
-            android:id="@+id/tv_project_description"
+            android:id="@+id/tv_task_description"
             android:layout_margin="5dp" />
     </LinearLayout>
 
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_progress"
-            android:id="@+id/tv_project_progress_label"
+            android:id="@+id/tv_task_progress_label"
             android:layout_marginLeft="5dp" />
 
         <ProgressBar
@@ -61,7 +61,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/progressBar_project_progress"
+            android:id="@+id/progressBar_task_progress"
             android:max="100"
             android:progress="33"
             android:layout_marginLeft="10dp"
@@ -71,36 +71,6 @@
 
     </LinearLayout>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="#ffe8e8e8">
-
-        <Button
-            android:id="@+id/tasks"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Tâches"
-            android:layout_marginLeft="5dp" />
-        <!--style="?android:attr/borderlessButtonStyle"-->
-
-
-        <Button
-            android:id="@+id/my_tasks"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Mes tâches"
-            android:layout_marginRight="5dp" />
-
-     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -93,14 +93,14 @@ public class LogInActivity extends AccountAuthenticatorActivity implements LogIn
         String emailAddress = emailAddressTextView.getText().toString();
         String password = passwordTextView.getText().toString();
 
-        if (emailAddress.length() < 3) {
+        /*if (emailAddress.length() < 3) {
             hasErrors = true;
             emailAddressTextView.setError("The email address is not valid");
         }
         if (password.length() < 6) {
             hasErrors = true;
             passwordTextView.setError("The password must contain at least 6 characters");
-        }
+        }*/
 
         if (hasErrors) return;
 

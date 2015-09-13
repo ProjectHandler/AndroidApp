@@ -45,7 +45,8 @@ public final class AuthenticationHelper {
 
             @Override
             public void onCallError(VolleyError error) {
-                logInListener.onAuthenticationError(error.getMessage());
+                Integer code = error.networkResponse.statusCode;
+                logInListener.onAuthenticationError(code.toString());
             }
 
         }, Request.Method.GET, ApiRoutes.authentication(emailAddress, password));

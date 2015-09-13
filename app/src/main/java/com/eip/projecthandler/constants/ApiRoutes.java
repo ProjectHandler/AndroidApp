@@ -19,15 +19,19 @@ public class ApiRoutes {
 
     // Users
     public static final String USERS_GET = SERVER() + "/users";
-    public static String USER_GET(long id) {
-        return SERVER() + "/users/" + id;
-    }
+    public static String USER_GET(long id) {return SERVER() + "/users/" + id; }
 
     // Projects
     public static final String PROJECT_GET_BY_USER = SERVER() + "/project/allByUser";
 
+    //Tasks
+    public static final String TASK_GET_BY_PROJECT(long projectId) {return SERVER() + "/task/allByProject/" + projectId;}
+    public static final String TASK_GET_BY_PROJECT_AND_USER(long projectId) {return SERVER() + "/task/allByProjectAndUser/" + projectId;}
+
+
     // Tickets
-    //public static final String TICKET_GET_ALL = SERVER() + "/ticket/all";
+    public static final String TICKET_GET_BY_PROJECT = SERVER() + "/ticket/allByProject";
     public static final String TICKET_GET_BY_USER = SERVER() + "/ticket/allByUser";
+    public static final String TICKET_GET_BY_PROJECT_AND_USER(long projectId) {return SERVER() + "/ticket/allByProjectAndUser/" + projectId;}
 
 }

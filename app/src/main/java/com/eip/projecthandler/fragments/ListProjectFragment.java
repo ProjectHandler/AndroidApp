@@ -113,11 +113,12 @@ public class ListProjectFragment extends com.blunderer.materialdesignlibrary.fra
 
                 @Override
                 public void onCallSuccess(JSONArray result) throws JSONException {
-                    //Log.d("ListProjectFragment", "requestServer success, result: " + result.toString());
+                    Log.d("ListProjectFragment", "requestServer success, result: " + result.toString());
                     Gson gson = new Gson();
                     listProject.clear();
                     for (int i = 0; i < result.length(); i++) {
                         Project project = gson.fromJson(result.getJSONObject(i).toString(), Project.class);
+                        Log.d("ListProjectFragment", "requestServer success, project: " + project.getId());
                         listProject.add(project);
                     }
                     projectAdapter.notifyDataSetChanged();

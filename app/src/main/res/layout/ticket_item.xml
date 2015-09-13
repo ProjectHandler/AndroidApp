@@ -18,7 +18,7 @@
             android:id="@+id/priority"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="priority"
+            android:text="@string/priority_example"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:textSize="16sp"/>
@@ -29,7 +29,7 @@
             android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_toLeftOf="@+id/priority"
-            android:text="title"
+            android:text="@string/title_example"
             android:maxLines="1"
             android:textStyle="bold"
             android:textSize="20sp" />
@@ -48,7 +48,7 @@
             android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="status"
+            android:text="@string/status_example"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:textSize="16sp"/>
@@ -59,7 +59,7 @@
             android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_toLeftOf="@+id/status"
-            android:text="date"
+            android:text="@string/date_example"
             android:maxLines="1"
             android:textSize="16sp"/>
     </RelativeLayout>

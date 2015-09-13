@@ -15,10 +15,10 @@
         android:paddingRight="10dp">
 
         <TextView
-            android:id="@+id/date_end"
+            android:id="@+id/progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/date_example"
+            android:text="@string/progress_example"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:textSize="16sp"/>
@@ -44,24 +44,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
-        <TextView
-            android:id="@+id/progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/progress_example"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/description"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_width="match_parent"
-            android:layout_toLeftOf="@+id/progress"
-            android:text="@string/description_example"
-            android:maxLines="1"
-            android:textSize="16sp"/>
     </RelativeLayout>
 
 </LinearLayout>

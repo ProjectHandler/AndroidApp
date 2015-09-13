@@ -16,18 +16,23 @@
     <string name="projects">Projects</string>
     <string name="tickets">My tickets</string>
 
-    <!-- Project -->
+    <!-- button -->
     <string name="button_tasks">Tasks</string>
     <string name="button_my_tasks">My tasks</string>
     <string name="button_tickets">Tickets</string>
     <string name="button_my_tickets">My Tickets</string>
-    <string name="label_project_progress">progress: </string>
 
-    <!-- project text example -->
-    <string name="project_name_example">Example name</string>
-    <string name="project_description_example">Example description</string>
-    <string name="project_date_example">01/09/2015</string>
-    <string name="project_progress_example">33%</string>
+    <!-- label -->
+    <string name="label_progress">progress: </string>
 
 
+    <!-- text example -->
+    <string name="name_example">Example name</string>
+    <string name="description_example">Example description</string>
+    <string name="date_example">01/09/2015</string>
+    <string name="progress_example">33%</string>
+    <string name="priority_example">priority</string>
+    <string name="title_example">title</string>
+    <string name="status_example">title</string>
+    <string name="text_example">text</string>
 </resources>
