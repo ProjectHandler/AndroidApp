@@ -6,9 +6,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.blunderer.materialdesignlibrary.activities.NavigationDrawerActivity;
+import com.blunderer.materialdesignlibrary.handlers.ActionBarHandler;
 import com.blunderer.materialdesignlibrary.handlers.NavigationDrawerAccountsHandler;
 import com.blunderer.materialdesignlibrary.handlers.NavigationDrawerAccountsMenuHandler;
 import com.blunderer.materialdesignlibrary.handlers.NavigationDrawerBottomHandler;
+import com.blunderer.materialdesignlibrary.handlers.NavigationDrawerStyleHandler;
 import com.blunderer.materialdesignlibrary.handlers.NavigationDrawerTopHandler;
 import com.blunderer.materialdesignlibrary.models.Account;
 import com.eip.projecthandler.R;
@@ -53,6 +55,11 @@ public class HomeActivity extends NavigationDrawerActivity implements LogOutList
     }
 
     @Override
+    public NavigationDrawerStyleHandler getNavigationDrawerStyleHandler() {
+        return null;
+    }
+
+    @Override
     public NavigationDrawerAccountsHandler getNavigationDrawerAccountsHandler() {
         return null;
     }
@@ -70,7 +77,7 @@ public class HomeActivity extends NavigationDrawerActivity implements LogOutList
     public NavigationDrawerTopHandler getNavigationDrawerTopHandler() {
         return new NavigationDrawerTopHandler(this)
                 .addItem(R.string.home, R.drawable.ic_add, new HomeFragment())
-                .addItem(R.string.home, R.drawable.ic_help, new HomeFragment())
+                //.addItem(R.string.home, R.drawable.ic_help, new HomeFragment())
                 .addItem(R.string.projects, R.drawable.ic_add, new ListProjectFragment())
                 .addItem(R.string.tickets, R.drawable.ic_add, new ListTicketFragment());
     }
@@ -103,4 +110,21 @@ public class HomeActivity extends NavigationDrawerActivity implements LogOutList
         return 0;
     }
 
+    @Override
+    public void onBackPressed() {
+        if (isNavigationDrawerOpen())
+            closeNavigationDrawer();
+        else
+            openNavigationDrawer();
+    }
+
+    @Override
+    protected boolean enableActionBarShadow() {
+        return false;
+    }
+
+    @Override
+    protected ActionBarHandler getActionBarHandler() {
+        return null;
+    }
 }

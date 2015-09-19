@@ -38,14 +38,14 @@ public class ProjectFragment extends Fragment {
            btn_tasks = (Button) view.findViewById(R.id.tasks);
            btn_tasks.setOnClickListener(new View.OnClickListener() {
                public void onClick(View arg0) {
-                   loadTask(true);
+                   loadTask(false);
                }
            });
 
            btn_my_tasks = (Button) view.findViewById(R.id.my_tasks);
            btn_my_tasks.setOnClickListener(new View.OnClickListener() {
                public void onClick(View arg0) {
-                   loadTask(false);
+                   loadTask(true);
                }
            });
 
@@ -64,7 +64,7 @@ public class ProjectFragment extends Fragment {
 
     private void loadTask(Boolean onlyUserTask) {
         ListTaskFragment listTaskFragment = new ListTaskFragment();
-        listTaskFragment.setOnlyUserTask(true);
+        listTaskFragment.setOnlyUserTask(onlyUserTask);
         listTaskFragment.setProjectId(project.getId());
 
 

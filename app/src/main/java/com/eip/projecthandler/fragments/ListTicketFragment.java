@@ -62,7 +62,7 @@ public class ListTicketFragment extends com.blunderer.materialdesignlibrary.frag
 
     @Override
     public int[] getPullToRefreshColorResources() {
-        return new int[]{R.color.color_primary};
+        return new int[]{R.color.mdl_color_primary};
     }
 
     @Override

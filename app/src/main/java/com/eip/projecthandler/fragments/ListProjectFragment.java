@@ -61,7 +61,7 @@ public class ListProjectFragment extends com.blunderer.materialdesignlibrary.fra
 
     @Override
     public int[] getPullToRefreshColorResources() {
-        return new int[]{R.color.color_primary};
+        return new int[]{R.color.mdl_color_primary};
     }
 
     @Override

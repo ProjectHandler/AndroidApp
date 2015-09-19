@@ -27,9 +27,6 @@ public class HomeFragment extends Fragment {
 
     private TextView tv_test;
 
-    /*http://localhost:8080/projecthandler/api/user/get/12?token=002ee001-ef24-4cf3-ac39-4b1dc7576351
-    ?token=002ee001-ef24-4cf3-ac39-4b1dc7576351*/
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
