@@ -39,14 +39,99 @@
     </LinearLayout>
 
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:paddingBottom="5dp"
         android:background="#ffe8e8e8"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_dateBegin"
+            android:id="@+id/tv_project_dateBegin_label"
+            android:layout_marginLeft="5dp" />
+
+        <TextView
+            android:id="@+id/date_begin"
+            android:text="@string/date_example"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="#ffe8e8e8"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_dateEnd"
+            android:id="@+id/tv_project_dateEnd_label"
+            android:layout_marginLeft="5dp" />
+
+        <TextView
+            android:id="@+id/date_end"
+            android:text="@string/date_example"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="#ffe8e8e8"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_deadline"
+            android:id="@+id/tv_project_deadline_label"
+            android:layout_marginLeft="5dp" />
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/progressBar_project_deadline"
+            android:max="100"
+            android:progress="33"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="2dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:background="#ffe8e8e8"
+        android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp">
 
         <TextView
@@ -67,9 +152,11 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="2dp" />
-
-
     </LinearLayout>
+
+
+
+
 
 
     <LinearLayout
@@ -90,8 +177,6 @@
             android:text="Tâches"
             android:layout_marginLeft="5dp" />
         <!--style="?android:attr/borderlessButtonStyle"-->
-
-
         <Button
             android:id="@+id/my_tasks"
             android:layout_width="0dp"
@@ -128,7 +213,6 @@
             android:layout_weight="1"
             android:text="Mes tickets"
             android:layout_marginRight="5dp" />
-
     </LinearLayout>
 
 </LinearLayout>

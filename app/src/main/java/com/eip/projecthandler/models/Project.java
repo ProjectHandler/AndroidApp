@@ -11,6 +11,9 @@ public class Project {
     private Date dateBegin;
     private Date dateEnd;
     private String status;
+    private Integer dateProgress;
+    private Integer daysLeft;
+    private Integer tasksProgress;
 
     public Project() {
     }
@@ -77,5 +80,29 @@ public class Project {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Integer getDateProgress() {
+        return dateProgress;
+    }
+
+    public void setDateProgress(Integer dateProgress) {
+        this.dateProgress = dateProgress;
+    }
+
+    public Integer getDaysLeft() {
+        return daysLeft;
+    }
+
+    public void setDaysLeft(Integer daysLeft) {
+        this.daysLeft = daysLeft;
+    }
+
+    public Integer getTasksProgress() {
+        return tasksProgress;
+    }
+
+    public void setTasksProgress(Integer tasksProgress) {
+        this.tasksProgress = tasksProgress;
     }
 }

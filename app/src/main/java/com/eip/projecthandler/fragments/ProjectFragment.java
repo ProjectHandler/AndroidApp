@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.eip.projecthandler.R;
+import com.eip.projecthandler.helpers.util;
 import com.eip.projecthandler.models.Project;
 
 public class ProjectFragment extends Fragment {
@@ -26,14 +27,20 @@ public class ProjectFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_project, container, false);
 
        if (project !=null) {
-           TextView tv1 = (TextView) view.findViewById(R.id.tv_project_name);
-           tv1.setText(project.getName());
+           TextView tvProjectName           = (TextView) view.findViewById(R.id.tv_project_name);
+           TextView tvProjectDescription    = (TextView) view.findViewById(R.id.tv_project_description);
+           TextView tvDateBegin             = (TextView) view.findViewById(R.id.date_begin);
+           TextView tvDateEnd               = (TextView) view.findViewById(R.id.date_end);
+           ProgressBar pbDeadline           = (ProgressBar) view.findViewById(R.id.progressBar_project_deadline);
+           ProgressBar pbProgress           = (ProgressBar) view.findViewById(R.id.progressBar_project_progress);
 
-           TextView tv2 = (TextView) view.findViewById(R.id.tv_project_description);
-           tv2.setText(project.getDescription());
+           tvProjectName.setText(project.getName());
+           tvProjectDescription.setText(project.getDescription());
+           tvDateBegin.setText(util.getDateString(getActivity().getApplicationContext(), project.getDateBegin()));
+           tvDateEnd.setText(util.getDateString(getActivity().getApplicationContext(), project.getDateEnd()));
 
-           ProgressBar pb_progress = (ProgressBar) view.findViewById(R.id.progressBar_project_progress);
-           pb_progress.setProgress(Integer.parseInt(project.getProgress().toString()));
+           pbDeadline.setProgress(project.getDateProgress());
+           pbProgress.setProgress(project.getTasksProgress());
 
            btn_tasks = (Button) view.findViewById(R.id.tasks);
            btn_tasks.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +55,15 @@ public class ProjectFragment extends Fragment {
                    loadTask(true);
                }
            });
+
+
+           //date debut
+           //date fin
+           //deadline  -> dateProgress
+           //Avancee  -> tasksProgress
+           //jour restants
+           //nb tache
+           //nb tickets
 
        }
 

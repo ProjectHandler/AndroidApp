@@ -15,6 +15,7 @@
     <string name="log_out">Log out</string>
     <string name="projects">Projects</string>
     <string name="tickets">My tickets</string>
+     <string name="tasks">Tasks</string>
 
     <!-- button -->
     <string name="button_tasks">Tasks</string>
@@ -24,7 +25,9 @@
 
     <!-- label -->
     <string name="label_progress">progress: </string>
-
+    <string name="label_deadline">deadline: </string>
+    <string name="label_dateBegin">Begin at: </string>
+    <string name="label_dateEnd">End at: </string>
 
     <!-- text example -->
     <string name="name_example">Example name</string>

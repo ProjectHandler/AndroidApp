@@ -28,7 +28,6 @@ public class ApiRoutes {
     public static final String TASK_GET_BY_PROJECT(long projectId) {return SERVER() + "/task/allByProject/" + projectId;}
     public static final String TASK_GET_BY_PROJECT_AND_USER(long projectId) {return SERVER() + "/task/allByProjectAndUser/" + projectId;}
 
-
     // Tickets
     public static final String TICKET_GET_BY_PROJECT = SERVER() + "/ticket/allByProject";
     public static final String TICKET_GET_BY_USER = SERVER() + "/ticket/allByUser";
