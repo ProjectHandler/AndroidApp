@@ -54,7 +54,8 @@
             android:layout_height="wrap_content"
             android:text="@string/label_progress"
             android:id="@+id/tv_task_progress_label"
-            android:layout_marginLeft="5dp" />
+            android:layout_marginLeft="5dp"
+            />
 
         <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"
@@ -71,6 +72,36 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="#ffe8e8e8"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/label_sub_tasks"
+            android:id="@+id/textView"
+            android:layout_margin="5dp" />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView_subTasks"
+            android:focusable="false"
+            android:choiceMode="multipleChoice" />
+
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -87,7 +118,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tickets"
+            android:text="@string/button_tickets"
             android:layout_marginLeft="5dp"
             />
 
@@ -96,7 +127,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Mes tickets"
+            android:text="@string/button_my_tickets"
             android:layout_marginRight="5dp" />
 
     </LinearLayout>

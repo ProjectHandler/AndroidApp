@@ -18,6 +18,7 @@ public class Task {
     private List<User> users;
     private Long row;
     private Set<Task> dependtasks;
+    private Set<MobileSubTaskDTO> mobileSubTaskDTO;
 
     public Task() {
 
@@ -117,5 +118,13 @@ public class Task {
 
     public void setDependtasks(Set<Task> dependtasks) {
         this.dependtasks = dependtasks;
+    }
+
+    public Set<MobileSubTaskDTO> getMobileSubTaskDTO() {
+        return mobileSubTaskDTO;
+    }
+
+    public void setMobileSubTaskDTO(Set<MobileSubTaskDTO> mobileSubTaskDTO) {
+        this.mobileSubTaskDTO = mobileSubTaskDTO;
     }
 }

@@ -86,7 +86,11 @@ public class ListProjectFragment extends com.blunderer.materialdesignlibrary.fra
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.remove(this);
-        fragmentTransaction.add(R.id.fragment_container, projectFragment);
+        //fragmentTransaction.add(R.id.fragment_container, projectFragment);
+        //fragmentTransaction.commit();
+
+        fragmentTransaction.replace(R.id.fragment_container, projectFragment);
+        fragmentTransaction.addToBackStack(this.toString());
         fragmentTransaction.commit();
     }
 

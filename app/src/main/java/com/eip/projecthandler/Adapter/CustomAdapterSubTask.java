@@ -1,31 +1,36 @@
 package com.eip.projecthandler.Adapter;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.eip.projecthandler.R;
-import com.eip.projecthandler.helpers.util;
-import com.eip.projecthandler.models.Project;
+import com.eip.projecthandler.models.MobileSubTaskDTO;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-public class CustomAdapterProject extends BaseAdapter {
+public class CustomAdapterSubTask  extends BaseAdapter {
 
     Context context;
-    List<Project> rowItems;
+    List<MobileSubTaskDTO> rowItems = new ArrayList<MobileSubTaskDTO>();
 
-    public CustomAdapterProject(Context context, List<Project> rowItems) {
+    public CustomAdapterSubTask(Context context, Set<MobileSubTaskDTO> rowItems) {
         this.context = context;
-        this.rowItems = rowItems;
+        this.rowItems.addAll(rowItems);
+        setRowItems(rowItems);
     }
 
-    public void setRowItems(List<Project> rowItems) {
-        this.rowItems = rowItems;
+    public void setRowItems(Set<MobileSubTaskDTO> rowItems) {
+        this.rowItems.clear();
+        this.rowItems.addAll(rowItems);
     }
 
     @Override
@@ -46,9 +51,6 @@ public class CustomAdapterProject extends BaseAdapter {
     /* private view holder class */
     private class ViewHolder {
         TextView name;
-        TextView description;
-        TextView dateBegin;
-        TextView dayeft;
     }
 
     @Override
@@ -61,20 +63,14 @@ public class CustomAdapterProject extends BaseAdapter {
 
         if (convertView == null) {
 
-            convertView = mInflater.inflate(R.layout.project_item, null);
+            convertView = mInflater.inflate(R.layout.subtask_item, null);
             holder = new ViewHolder();
 
-            holder.name = (TextView) convertView.findViewById(R.id.name);
-            holder.description = (TextView) convertView.findViewById(R.id.description);
-            holder.dateBegin = (TextView) convertView.findViewById(R.id.date_begin);
-            holder.dayeft = (TextView) convertView.findViewById(R.id.day_left);
+            holder.name = (CheckBox) convertView.findViewById(R.id.checkBox_subTask);
 
-            Project row_pos = rowItems.get(position);
+            MobileSubTaskDTO row_pos = rowItems.get(position);
 
-            holder.name.setText(row_pos.getName());
-            holder.description.setText(row_pos.getDescription());
-            holder.dateBegin.setText(util.getDateString(context, row_pos.getDateBegin()));
-            holder.dayeft.setText(row_pos.getDaysLeft().toString() + " " +  context.getString(R.string.label_days));
+            holder.name.setText(row_pos.getDescription());
 
             convertView.setTag(holder);
         } else {

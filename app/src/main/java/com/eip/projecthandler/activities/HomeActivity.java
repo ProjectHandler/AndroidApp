@@ -112,13 +112,6 @@ public class HomeActivity extends NavigationDrawerActivity implements LogOutList
         return 0;
     }
 
-    @Override
-    public void onBackPressed() {
-        if (isNavigationDrawerOpen())
-            closeNavigationDrawer();
-        else
-            openNavigationDrawer();
-    }
 
     @Override
     protected boolean enableActionBarShadow() {
@@ -129,4 +122,10 @@ public class HomeActivity extends NavigationDrawerActivity implements LogOutList
     protected ActionBarHandler getActionBarHandler() {
         return null;
     }
+
+    @Override
+    public void performNavigationDrawerItemClick(int position) {
+        super.performNavigationDrawerItemClick(position);
+    }
+
 }

@@ -174,7 +174,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tâches"
+            android:text="@string/button_tasks"
             android:layout_marginLeft="5dp" />
         <!--style="?android:attr/borderlessButtonStyle"-->
         <Button
@@ -182,7 +182,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Mes tâches"
+            android:text="@string/button_my_tasks"
             android:layout_marginRight="5dp" />
 
      </LinearLayout>
@@ -202,7 +202,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tickets"
+            android:text="@string/button_tickets"
             android:layout_marginLeft="5dp"
             />
 
@@ -211,7 +211,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Mes tickets"
+            android:text="@string/button_my_tickets"
             android:layout_marginRight="5dp" />
     </LinearLayout>
 

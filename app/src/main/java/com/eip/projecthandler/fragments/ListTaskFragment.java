@@ -91,7 +91,11 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.remove(this);
-        fragmentTransaction.add(R.id.fragment_container, taskFragment);
+        //fragmentTransaction.add(R.id.fragment_container, taskFragment);
+        //fragmentTransaction.commit();
+
+        fragmentTransaction.replace(R.id.fragment_container, taskFragment);
+        fragmentTransaction.addToBackStack(this.toString());
         fragmentTransaction.commit();
     }
 
@@ -113,10 +117,15 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
             }
 
             String url;
-            if (this.onlyUserTask)
-                url = ApiRoutes.TASK_GET_BY_PROJECT_AND_USER(this.projectId);
-            else
-                url = ApiRoutes.TASK_GET_BY_PROJECT(this.projectId);
+            if (this.projectId == null) {
+                url = ApiRoutes.TASK_GET_ALL_BY_USER;
+            } else {
+                if (this.onlyUserTask)
+                    url = ApiRoutes.TASK_GET_BY_PROJECT_AND_USER(this.projectId);
+                else
+                    url = ApiRoutes.TASK_GET_BY_PROJECT(this.projectId);
+            }
+
 
             Log.d("ListTaskFragment", "url: " + url);
             NetworkHelper networkHelper = NetworkHelper.getInstance(getActivity());
@@ -162,4 +171,6 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
     public void setOnlyUserTask(Boolean onlyUserTask) {
         this.onlyUserTask = onlyUserTask;
     }
+
+
 }

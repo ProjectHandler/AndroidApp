@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.eip.projecthandler.R;
+import com.eip.projecthandler.activities.HomeActivity;
 import com.eip.projecthandler.helpers.util;
 import com.eip.projecthandler.models.Project;
 
@@ -56,16 +57,12 @@ public class ProjectFragment extends Fragment {
                }
            });
 
-
-           //date debut
-           //date fin
-           //deadline  -> dateProgress
-           //Avancee  -> tasksProgress
            //jour restants
            //nb tache
            //nb tickets
 
        }
+       ((HomeActivity)getActivity()).getSupportActionBar().setTitle(project.getName().toString());
 
         return view;
     }
@@ -88,7 +85,11 @@ public class ProjectFragment extends Fragment {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.remove(this);
-        fragmentTransaction.add(R.id.fragment_container, listTaskFragment);
+        //fragmentTransaction.add(R.id.fragment_container, listTaskFragment);
+        //fragmentTransaction.commit();
+
+        fragmentTransaction.replace(R.id.fragment_container, listTaskFragment);
+        fragmentTransaction.addToBackStack(this.toString());
         fragmentTransaction.commit();
     }
 }

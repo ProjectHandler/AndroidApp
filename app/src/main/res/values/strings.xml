@@ -28,6 +28,8 @@
     <string name="label_deadline">deadline: </string>
     <string name="label_dateBegin">Begin at: </string>
     <string name="label_dateEnd">End at: </string>
+    <string name="label_days">days left</string>
+    <string name="label_sub_tasks">Sub Tasks</string>
 
     <!-- text example -->
     <string name="name_example">Example name</string>
@@ -38,4 +40,5 @@
     <string name="title_example">title</string>
     <string name="status_example">title</string>
     <string name="text_example">text</string>
+    <string name="remaining_day_example">D-120</string>
 </resources>
