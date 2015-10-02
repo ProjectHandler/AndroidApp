@@ -40,10 +40,9 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
     @Override
     public ListAdapter getListAdapter() {
         listTasks = new ArrayList<Task>();
+        getListOfTask();
         taskAdapter = new CustomAdapterTask(getActivity(), listTasks);
         mListView.setAdapter(taskAdapter);
-
-        getListOfTask();
 
         Log.d("ListTaskFragment", "ListTaskFragment tasks !!!! projectid:" + projectId);
 
@@ -75,10 +74,10 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                //mAdapter.notifyDataSetChanged();
+                getListOfTask();
                 setRefreshing(false);
-            }
-        }, 2000);
+           }
+       }, 2000);
     }
 
     @Override
@@ -126,7 +125,6 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
                     url = ApiRoutes.TASK_GET_BY_PROJECT(this.projectId);
             }
 
-
             Log.d("ListTaskFragment", "url: " + url);
             NetworkHelper networkHelper = NetworkHelper.getInstance(getActivity());
             networkHelper.setAuthToken(token);
@@ -171,6 +169,5 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
     public void setOnlyUserTask(Boolean onlyUserTask) {
         this.onlyUserTask = onlyUserTask;
     }
-
 
 }

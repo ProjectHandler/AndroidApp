@@ -7,8 +7,8 @@ public class ApiRoutes {
 
     // Servers
     private static final String SERVER_PROD = "http://163.5.84.233:8080/projecthandler/api";
-    private static final String SERVER_DEV = "http://192.168.1.8:8080/projecthandler/api";
-    //private static final String SERVER_DEV = "http://192.168.1.94:8080/projecthandler/api";
+    //private static final String SERVER_DEV = "http://192.168.1.8:8080/projecthandler/api";
+    private static final String SERVER_DEV = "http://192.168.1.94:8080/projecthandler/api";
 
     public static String SERVER() {
         return DEBUG ? SERVER_DEV : SERVER_PROD;

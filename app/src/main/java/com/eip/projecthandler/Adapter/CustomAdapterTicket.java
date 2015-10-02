@@ -19,6 +19,14 @@ public class CustomAdapterTicket extends BaseAdapter {
     Context context;
     List<Ticket> rowItems;
 
+    /* private view holder class */
+    private class ViewHolder {
+        TextView title;
+        TextView status;
+        TextView priority;
+        TextView updatedAt;
+    }
+
     public CustomAdapterTicket(Context context, List<Ticket> rowItems) {
         this.context = context;
         this.rowItems = rowItems;
@@ -43,14 +51,6 @@ public class CustomAdapterTicket extends BaseAdapter {
         return rowItems.indexOf(getItem(position));
     }
 
-    /* private view holder class */
-    private class ViewHolder {
-        TextView title;
-        TextView status;
-        TextView priority;
-        TextView updatedAt;
-    }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -69,28 +69,31 @@ public class CustomAdapterTicket extends BaseAdapter {
             holder.priority = (TextView) convertView.findViewById(R.id.priority);
             holder.updatedAt = (TextView) convertView.findViewById(R.id.updatedAt);
 
-            Ticket row_pos = rowItems.get(position);
-
-            holder.title.setText(row_pos.getTitle());
-
-            if (row_pos.getTicketStatus() == null)
-                holder.status.setText("");
-            else
-                holder.status.setText(row_pos.getTicketStatus().getValue());
-
-            if (row_pos.getTicketPriority() == null)
-                holder.priority.setText("");
-            else
-                holder.priority.setText(row_pos.getTicketPriority().getValue());
-
-            holder.updatedAt.setText(util.getDateString(context, row_pos.getUpdatedAt()));
+            setViewHolder(convertView, holder, position);
 
             convertView.setTag(holder);
-
         } else {
             holder = (ViewHolder) convertView.getTag();
+            setViewHolder(convertView, holder, position);
         }
 
         return convertView;
+    }
+
+    private void setViewHolder(View convertView, ViewHolder holder, int position) {
+        Ticket row_pos = rowItems.get(position);
+        holder.title.setText(row_pos.getTitle());
+
+        if (row_pos.getTicketStatus() == null)
+            holder.status.setText("");
+        else
+            holder.status.setText(row_pos.getTicketStatus().getValue());
+
+        if (row_pos.getTicketPriority() == null)
+            holder.priority.setText("");
+        else
+            holder.priority.setText(row_pos.getTicketPriority().getValue());
+
+        holder.updatedAt.setText(util.getDateString(context, row_pos.getUpdatedAt()));
     }
 }

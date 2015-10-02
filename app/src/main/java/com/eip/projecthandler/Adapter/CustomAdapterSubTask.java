@@ -22,6 +22,11 @@ public class CustomAdapterSubTask  extends BaseAdapter {
     Context context;
     List<MobileSubTaskDTO> rowItems = new ArrayList<MobileSubTaskDTO>();
 
+    /* private view holder class */
+    private class ViewHolder {
+        TextView name;
+    }
+
     public CustomAdapterSubTask(Context context, Set<MobileSubTaskDTO> rowItems) {
         this.context = context;
         this.rowItems.addAll(rowItems);
@@ -48,11 +53,6 @@ public class CustomAdapterSubTask  extends BaseAdapter {
         return rowItems.indexOf(getItem(position));
     }
 
-    /* private view holder class */
-    private class ViewHolder {
-        TextView name;
-    }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -60,24 +60,25 @@ public class CustomAdapterSubTask  extends BaseAdapter {
 
         LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
-
         if (convertView == null) {
-
             convertView = mInflater.inflate(R.layout.subtask_item, null);
             holder = new ViewHolder();
-
             holder.name = (CheckBox) convertView.findViewById(R.id.checkBox_subTask);
 
-            MobileSubTaskDTO row_pos = rowItems.get(position);
-
-            holder.name.setText(row_pos.getDescription());
+            setViewHolder(convertView, holder, position);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
+            setViewHolder(convertView, holder, position);
         }
 
         return convertView;
     }
 
+    private void setViewHolder(View convertView, ViewHolder holder, int position) {
+        MobileSubTaskDTO row_pos = rowItems.get(position);
+
+        holder.name.setText(row_pos.getDescription());
+    }
 }

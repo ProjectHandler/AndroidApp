@@ -71,7 +71,7 @@ public class ListTicketFragment extends com.blunderer.materialdesignlibrary.frag
 
             @Override
             public void run() {
-                //mAdapter.notifyDataSetChanged();
+                getListOfTicket();
                 setRefreshing(false);
             }
         }, 2000);

@@ -70,7 +70,7 @@ public class ListProjectFragment extends com.blunderer.materialdesignlibrary.fra
 
             @Override
             public void run() {
-                //mAdapter.notifyDataSetChanged();
+                getListOfProject();
                 setRefreshing(false);
             }
         }, 2000);

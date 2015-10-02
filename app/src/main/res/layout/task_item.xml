@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="5dp">
@@ -10,29 +10,41 @@
         android:id="@+id/relativeLayout1"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
 
         <TextView
             android:id="@+id/progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/progress_example"
-            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/name"
+            android:textSize="16sp"
             android:layout_alignParentRight="true"
-            android:textSize="16sp"/>
+            android:gravity="right"
+            android:maxLines="1"
+            android:minLines="1"
+            android:layout_centerVertical="true" />
 
         <TextView
             android:id="@+id/name"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_width="match_parent"
-            android:layout_toLeftOf="@+id/date_end"
+            android:layout_width="wrap_content"
             android:text="@string/name_example"
             android:maxLines="1"
             android:textStyle="bold"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_toRightOf="@+id/task_row_icon"
+            android:layout_alignParentTop="false"
+            android:layout_centerVertical="true" />
 
+        <ImageView
+            android:id="@+id/task_row_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_action_task2"
+            android:contentDescription="@string/task_icon_description" />
     </RelativeLayout>
 
     <RelativeLayout

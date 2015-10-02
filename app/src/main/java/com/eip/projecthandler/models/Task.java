@@ -127,4 +127,5 @@ public class Task {
     public void setMobileSubTaskDTO(Set<MobileSubTaskDTO> mobileSubTaskDTO) {
         this.mobileSubTaskDTO = mobileSubTaskDTO;
     }
+
 }
