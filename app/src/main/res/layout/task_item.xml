@@ -5,57 +5,51 @@
     android:orientation="vertical"
     android:padding="5dp">
 
-    <RelativeLayout
+    <TableRow
         android:layout_width="match_parent"
-        android:id="@+id/relativeLayout1"
         android:layout_height="wrap_content"
+        android:id="@+id/tableRow1"
         android:background="#FFFFFF"
         android:paddingLeft="5dp"
-        android:paddingRight="5dp">
-
-        <TextView
-            android:id="@+id/progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/progress_example"
-            android:layout_toRightOf="@+id/name"
-            android:textSize="16sp"
-            android:layout_alignParentRight="true"
-            android:gravity="right"
-            android:maxLines="1"
-            android:minLines="1"
-            android:layout_centerVertical="true" />
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/name_example"
-            android:maxLines="1"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_toRightOf="@+id/task_row_icon"
-            android:layout_alignParentTop="false"
-            android:layout_centerVertical="true" />
+        android:paddingRight="3dp"
+        >
 
         <ImageView
             android:id="@+id/task_row_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_action_task2"
-            android:contentDescription="@string/task_icon_description" />
-    </RelativeLayout>
+            android:src="@drawable/ic_action_task"
+            android:contentDescription="@string/task_icon_description"
+          />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:id="@+id/relativeLayout2"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        <TextView
+            android:id="@+id/name"
+            android:layout_height="wrap_content"
+            android:text="Configuration de l'environement de developement"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_marginLeft="5dp"
+            android:ellipsize="end" />
 
+        <TextView
+            android:id="@+id/progress"
+            android:layout_height="wrap_content"
+            android:text="@string/progress_example"
+            android:textSize="16sp"
+            android:gravity="right"
+            android:maxLines="1"
+            android:minLines="1"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+           />
 
-    </RelativeLayout>
+    </TableRow>
+
 
 </LinearLayout>

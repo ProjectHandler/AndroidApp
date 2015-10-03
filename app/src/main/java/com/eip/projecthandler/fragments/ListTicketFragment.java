@@ -1,7 +1,5 @@
 package com.eip.projecthandler.fragments;
 
-import android.accounts.NetworkErrorException;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -15,12 +13,8 @@ import com.android.volley.VolleyError;
 import com.eip.projecthandler.Adapter.CustomAdapterTicket;
 import com.eip.projecthandler.R;
 import com.eip.projecthandler.constants.ApiRoutes;
-import com.eip.projecthandler.constants.AuthenticatorConstants;
-import com.eip.projecthandler.helpers.account.AccountAuthenticator;
-import com.eip.projecthandler.helpers.account.AccountHelper;
 import com.eip.projecthandler.helpers.api.NetworkHelper;
 import com.eip.projecthandler.listeners.ArrayNetworkListener;
-import com.eip.projecthandler.models.Account;
 import com.eip.projecthandler.models.Ticket;
 import com.google.gson.Gson;
 
@@ -32,8 +26,18 @@ import java.util.List;
 
 public class ListTicketFragment extends com.blunderer.materialdesignlibrary.fragments.ListViewFragment {
 
+    private Long taskId;
+    private Boolean onlyUserTicket;
     private List<Ticket> listTickets;
     private CustomAdapterTicket ticketAdapter;
+
+    public ListTicketFragment() {
+    }
+
+    public ListTicketFragment(Long taskId, Boolean onlyUserTicket) {
+        this.taskId = taskId;
+        this.onlyUserTicket = onlyUserTicket;
+    }
 
     @Override
     public ListAdapter getListAdapter() {
@@ -79,17 +83,12 @@ public class ListTicketFragment extends com.blunderer.materialdesignlibrary.frag
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        Ticket ticket = (Ticket) adapterView.getItemAtPosition(position);
-        TicketFragment ticketFragment = new TicketFragment();
-        ticketFragment.setTicket(ticket);
+        TicketFragment ticketFragment = new TicketFragment((Ticket) adapterView.getItemAtPosition(position));
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.remove(this);
-        //fragmentTransaction.add(R.id.fragment_container, ticketFragment);
-        //fragmentTransaction.commit();
-
         fragmentTransaction.replace(R.id.fragment_container, ticketFragment);
         fragmentTransaction.addToBackStack(this.toString());
         fragmentTransaction.commit();
@@ -102,20 +101,10 @@ public class ListTicketFragment extends com.blunderer.materialdesignlibrary.frag
 
     private void getListOfTicket() {
         try {
-            String token = null;
-            AccountAuthenticator aAuth = new AccountAuthenticator(getActivity());
-            Account acc = AccountHelper.getAccount(getActivity());
-            try {
-                Bundle bundle = aAuth.getAuthToken(null, acc, AuthenticatorConstants.AUTH_TOKEN_TYPE, null);
-                token = (String) bundle.get("authtoken");
-            } catch (NetworkErrorException e) {
-                e.printStackTrace();
-            }
-
             String url = ApiRoutes.TICKET_GET_BY_USER;
 
             NetworkHelper networkHelper = NetworkHelper.getInstance(getActivity());
-            networkHelper.setAuthToken(token);
+            networkHelper.retrieveToken(getActivity());
             networkHelper.arrayRequestServer(new ArrayNetworkListener() {
 
                 @Override
@@ -141,4 +130,5 @@ public class ListTicketFragment extends com.blunderer.materialdesignlibrary.frag
             e.printStackTrace();
         }
     }
+
 }

@@ -80,7 +80,7 @@ public class HomeActivity extends NavigationDrawerActivity implements LogOutList
                 .addItem(R.string.home, R.drawable.ic_add, new HomeFragment())
                 //.addItem(R.string.home, R.drawable.ic_help, new HomeFragment())
                 .addItem(R.string.projects, R.drawable.ic_action_folder, new ListProjectFragment())
-                .addItem(R.string.tasks, R.drawable.ic_action_task, new ListTaskFragment())
+                .addItem(R.string.tasks, R.drawable.ic_action_task, new ListTaskFragment(null, true))
                 .addItem(R.string.tickets, R.drawable.ic_action_ticket, new ListTicketFragment());
     }
 

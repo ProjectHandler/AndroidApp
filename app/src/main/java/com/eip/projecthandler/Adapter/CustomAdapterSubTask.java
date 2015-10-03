@@ -8,10 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.TextView;
 
 import com.eip.projecthandler.R;
-import com.eip.projecthandler.models.MobileSubTaskDTO;
+import com.eip.projecthandler.models.SubTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,20 +19,20 @@ import java.util.Set;
 public class CustomAdapterSubTask  extends BaseAdapter {
 
     Context context;
-    List<MobileSubTaskDTO> rowItems = new ArrayList<MobileSubTaskDTO>();
+    List<SubTask> rowItems = new ArrayList<SubTask>();
 
     /* private view holder class */
     private class ViewHolder {
-        TextView name;
+        CheckBox description;
     }
 
-    public CustomAdapterSubTask(Context context, Set<MobileSubTaskDTO> rowItems) {
+    public CustomAdapterSubTask(Context context, Set<SubTask> rowItems) {
         this.context = context;
         this.rowItems.addAll(rowItems);
         setRowItems(rowItems);
     }
 
-    public void setRowItems(Set<MobileSubTaskDTO> rowItems) {
+    public void setRowItems(Set<SubTask> rowItems) {
         this.rowItems.clear();
         this.rowItems.addAll(rowItems);
     }
@@ -63,7 +62,7 @@ public class CustomAdapterSubTask  extends BaseAdapter {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.subtask_item, null);
             holder = new ViewHolder();
-            holder.name = (CheckBox) convertView.findViewById(R.id.checkBox_subTask);
+            holder.description = (CheckBox) convertView.findViewById(R.id.checkBox_subTask);
 
             setViewHolder(convertView, holder, position);
 
@@ -77,8 +76,9 @@ public class CustomAdapterSubTask  extends BaseAdapter {
     }
 
     private void setViewHolder(View convertView, ViewHolder holder, int position) {
-        MobileSubTaskDTO row_pos = rowItems.get(position);
+        SubTask row_pos = rowItems.get(position);
 
-        holder.name.setText(row_pos.getDescription());
+        holder.description.setChecked(row_pos.isValidated());
+        holder.description.setText(row_pos.getDescription());
     }
 }

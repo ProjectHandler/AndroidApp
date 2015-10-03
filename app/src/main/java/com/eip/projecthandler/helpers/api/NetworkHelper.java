@@ -1,6 +1,8 @@
 package com.eip.projecthandler.helpers.api;
 
+import android.accounts.NetworkErrorException;
 import android.content.Context;
+import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.android.volley.AuthFailureError;
@@ -10,9 +12,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.eip.projecthandler.constants.AuthenticatorConstants;
 import com.eip.projecthandler.exceptions.AuthenticationException;
+import com.eip.projecthandler.helpers.account.AccountAuthenticator;
+import com.eip.projecthandler.helpers.account.AccountHelper;
 import com.eip.projecthandler.listeners.ArrayNetworkListener;
 import com.eip.projecthandler.listeners.ObejctNetworkListener;
+import com.eip.projecthandler.models.Account;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,8 +44,13 @@ public class NetworkHelper {
      * @return The NetworkHelper instance.
      */
     public static NetworkHelper getInstance(Context context) {
-        if (instance == null) instance = new NetworkHelper(context);
+        if (instance == null)
+            instance = new NetworkHelper(context);
         return instance;
+    }
+
+    public String getAuthToken() {
+        return this.mAuthToken;
     }
 
     /**
@@ -51,8 +62,16 @@ public class NetworkHelper {
         mAuthToken = authToken;
     }
 
-    public String getAuthToken() {
-        return this.mAuthToken;
+    public void retrieveToken(Context context) {
+        AccountAuthenticator aAuth = new AccountAuthenticator(context);
+        Account acc = AccountHelper.getAccount(context);
+        Bundle bundle = null;
+        try {
+            bundle = aAuth.getAuthToken(null, acc, AuthenticatorConstants.AUTH_TOKEN_TYPE, null);
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+        }
+        instance.setAuthToken((String) bundle.get("authtoken"));
     }
 
     /**
@@ -61,8 +80,8 @@ public class NetworkHelper {
      * or LogInListener.onAuthenticateError.
      *
      * @param obejctNetworkListener The network listener.
-     * @param method          The method used. Must be like Request.Method.?
-     * @param url             The url.
+     * @param method                The method used. Must be like Request.Method.?
+     * @param url                   The url.
      * @throws AuthenticationException
      */
     public void objectRequestServer(final ObejctNetworkListener obejctNetworkListener, int method, String url) {
@@ -73,7 +92,6 @@ public class NetworkHelper {
 
         JsonObjectRequest request = new JsonObjectRequest(method, url,
                 new Response.Listener<JSONObject>() {
-
                     @Override
                     public void onResponse(JSONObject response) {
                         if (obejctNetworkListener != null) try {
@@ -101,13 +119,11 @@ public class NetworkHelper {
      * or LogInListener.onAuthenticateError.
      *
      * @param obejctNetworkListener The network listener.
-     * @param method          The method used. Must be like Request.Method.?
-     * @param url             The url.
+     * @param method                The method used. Must be like Request.Method.?
+     * @param url                   The url.
      * @throws AuthenticationException
      */
-    private void objectRequestServerWithToken(final ObejctNetworkListener obejctNetworkListener,
-                                              int method,
-                                              String url) {
+    private void objectRequestServerWithToken(final ObejctNetworkListener obejctNetworkListener, int method, String url) {
         url = url + "?token=" + mAuthToken;
         JsonObjectRequest request = new JsonObjectRequest(method, url,
                 new Response.Listener<JSONObject>() {

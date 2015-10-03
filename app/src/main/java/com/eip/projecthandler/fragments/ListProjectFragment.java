@@ -1,7 +1,5 @@
 package com.eip.projecthandler.fragments;
 
-import android.accounts.NetworkErrorException;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -15,12 +13,8 @@ import com.android.volley.VolleyError;
 import com.eip.projecthandler.Adapter.CustomAdapterProject;
 import com.eip.projecthandler.R;
 import com.eip.projecthandler.constants.ApiRoutes;
-import com.eip.projecthandler.constants.AuthenticatorConstants;
-import com.eip.projecthandler.helpers.account.AccountAuthenticator;
-import com.eip.projecthandler.helpers.account.AccountHelper;
 import com.eip.projecthandler.helpers.api.NetworkHelper;
 import com.eip.projecthandler.listeners.ArrayNetworkListener;
-import com.eip.projecthandler.models.Account;
 import com.eip.projecthandler.models.Project;
 import com.google.gson.Gson;
 
@@ -78,17 +72,12 @@ public class ListProjectFragment extends com.blunderer.materialdesignlibrary.fra
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        Project project = (Project) adapterView.getItemAtPosition(position);
-        ProjectFragment projectFragment = new ProjectFragment();
-        projectFragment.setProject(project);
+        ProjectFragment projectFragment = new ProjectFragment((Project) adapterView.getItemAtPosition(position));
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.remove(this);
-        //fragmentTransaction.add(R.id.fragment_container, projectFragment);
-        //fragmentTransaction.commit();
-
         fragmentTransaction.replace(R.id.fragment_container, projectFragment);
         fragmentTransaction.addToBackStack(this.toString());
         fragmentTransaction.commit();
@@ -101,18 +90,8 @@ public class ListProjectFragment extends com.blunderer.materialdesignlibrary.fra
 
     private void getListOfProject() {
         try {
-            String token = null;
-            AccountAuthenticator aAuth = new AccountAuthenticator(getActivity());
-            Account acc = AccountHelper.getAccount(getActivity());
-            try {
-                Bundle bundle = aAuth.getAuthToken(null, acc, AuthenticatorConstants.AUTH_TOKEN_TYPE, null);
-                token = (String) bundle.get("authtoken");
-            } catch (NetworkErrorException e) {
-                e.printStackTrace();
-            }
-
             NetworkHelper networkHelper = NetworkHelper.getInstance(getActivity());
-            networkHelper.setAuthToken(token);
+            networkHelper.retrieveToken(getActivity());
             networkHelper.arrayRequestServer(new ArrayNetworkListener() {
 
                 @Override

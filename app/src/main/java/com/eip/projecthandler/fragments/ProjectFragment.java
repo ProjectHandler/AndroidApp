@@ -19,8 +19,12 @@ import com.eip.projecthandler.models.Project;
 public class ProjectFragment extends Fragment {
 
     private Project project;
-    private  Button btn_tasks;
-    private  Button btn_my_tasks;
+    private Button btn_tasks;
+    private Button btn_my_tasks;
+
+    public ProjectFragment(Project project) {
+        this.project = project;
+    }
 
    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,37 +61,20 @@ public class ProjectFragment extends Fragment {
                }
            });
 
-           //jour restants
-           //nb tache
-           //nb tickets
-
+           ((HomeActivity)getActivity()).getSupportActionBar().setTitle(project.getName().toString());
        }
-       ((HomeActivity)getActivity()).getSupportActionBar().setTitle(project.getName().toString());
+
 
         return view;
     }
 
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
     private void loadTask(Boolean onlyUserTask) {
-        ListTaskFragment listTaskFragment = new ListTaskFragment();
-        listTaskFragment.setOnlyUserTask(onlyUserTask);
-        listTaskFragment.setProjectId(project.getId());
-
+        ListTaskFragment listTaskFragment = new ListTaskFragment(project.getId(), onlyUserTask);
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.remove(this);
-        //fragmentTransaction.add(R.id.fragment_container, listTaskFragment);
-        //fragmentTransaction.commit();
-
         fragmentTransaction.replace(R.id.fragment_container, listTaskFragment);
         fragmentTransaction.addToBackStack(this.toString());
         fragmentTransaction.commit();

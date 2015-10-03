@@ -14,6 +14,9 @@ public class TicketFragment  extends Fragment {
 
     private Ticket ticket;
 
+    public TicketFragment(Ticket ticket) {
+        this.ticket = ticket;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

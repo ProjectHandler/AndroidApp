@@ -1,7 +1,5 @@
 package com.eip.projecthandler.fragments;
 
-import android.accounts.NetworkErrorException;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -15,12 +13,8 @@ import com.android.volley.VolleyError;
 import com.eip.projecthandler.Adapter.CustomAdapterTask;
 import com.eip.projecthandler.R;
 import com.eip.projecthandler.constants.ApiRoutes;
-import com.eip.projecthandler.constants.AuthenticatorConstants;
-import com.eip.projecthandler.helpers.account.AccountAuthenticator;
-import com.eip.projecthandler.helpers.account.AccountHelper;
 import com.eip.projecthandler.helpers.api.NetworkHelper;
 import com.eip.projecthandler.listeners.ArrayNetworkListener;
-import com.eip.projecthandler.models.Account;
 import com.eip.projecthandler.models.Task;
 import com.google.gson.Gson;
 
@@ -36,6 +30,11 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
     private CustomAdapterTask taskAdapter;
     private Long projectId;
     private Boolean onlyUserTask = false;
+
+    public ListTaskFragment(Long projectId, Boolean onlyUserTask) {
+        this.projectId = projectId;
+        this.onlyUserTask = onlyUserTask;
+    }
 
     @Override
     public ListAdapter getListAdapter() {
@@ -82,17 +81,12 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        Task task = (Task) adapterView.getItemAtPosition(position);
-        TaskFragment taskFragment = new TaskFragment();
-        taskFragment.setTask(task);
+        TaskFragment taskFragment = new TaskFragment((Task) adapterView.getItemAtPosition(position));
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.remove(this);
-        //fragmentTransaction.add(R.id.fragment_container, taskFragment);
-        //fragmentTransaction.commit();
-
         fragmentTransaction.replace(R.id.fragment_container, taskFragment);
         fragmentTransaction.addToBackStack(this.toString());
         fragmentTransaction.commit();
@@ -105,16 +99,6 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
 
     private void getListOfTask() {
         try {
-            String token = null;
-            AccountAuthenticator aAuth = new AccountAuthenticator(getActivity());
-            Account acc = AccountHelper.getAccount(getActivity());
-            try {
-                Bundle bundle = aAuth.getAuthToken(null, acc, AuthenticatorConstants.AUTH_TOKEN_TYPE, null);
-                token = (String) bundle.get("authtoken");
-            } catch (NetworkErrorException e) {
-                e.printStackTrace();
-            }
-
             String url;
             if (this.projectId == null) {
                 url = ApiRoutes.TASK_GET_ALL_BY_USER;
@@ -124,12 +108,10 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
                 else
                     url = ApiRoutes.TASK_GET_BY_PROJECT(this.projectId);
             }
-
             Log.d("ListTaskFragment", "url: " + url);
             NetworkHelper networkHelper = NetworkHelper.getInstance(getActivity());
-            networkHelper.setAuthToken(token);
+            networkHelper.retrieveToken(getActivity());
             networkHelper.arrayRequestServer(new ArrayNetworkListener() {
-
                 @Override
                 public void onCallSuccess(JSONArray result) throws JSONException {
                     Log.d("ListTaskFragment", "requestServer ok result: " + result);
@@ -152,22 +134,6 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
-    }
-
-    public Long getProjectId() {
-        return this.projectId;
-    }
-
-    public Boolean getOnlyUserTask() {
-        return onlyUserTask;
-    }
-
-    public void setOnlyUserTask(Boolean onlyUserTask) {
-        this.onlyUserTask = onlyUserTask;
     }
 
 }

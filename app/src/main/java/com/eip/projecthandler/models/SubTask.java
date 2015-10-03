@@ -1,6 +1,6 @@
 package com.eip.projecthandler.models;
 
-public class MobileSubTaskDTO {
+public class SubTask {
 
     private String description;
     private Task parentTask;
@@ -8,7 +8,7 @@ public class MobileSubTaskDTO {
     private boolean validated;
     private boolean taken;
 
-    public MobileSubTaskDTO() {
+    public SubTask() {
         this.description = "test 1";
     }
 

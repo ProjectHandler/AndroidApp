@@ -1,7 +1,6 @@
 package com.eip.projecthandler.models;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 public class Task {
@@ -15,10 +14,8 @@ public class Task {
     private Date startingDate;
     private Date endingDate;
     private String status;
-    private List<User> users;
     private Long row;
-    private Set<Task> dependtasks;
-    private Set<MobileSubTaskDTO> mobileSubTaskDTO;
+    private Set<SubTask> subTask;
 
     public Task() {
 
@@ -96,14 +93,6 @@ public class Task {
         this.status = status;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
     public Long getRow() {
         return row;
     }
@@ -112,20 +101,12 @@ public class Task {
         this.row = row;
     }
 
-    public Set<Task> getDependtasks() {
-        return dependtasks;
+    public Set<SubTask> getSubTask() {
+        return subTask;
     }
 
-    public void setDependtasks(Set<Task> dependtasks) {
-        this.dependtasks = dependtasks;
-    }
-
-    public Set<MobileSubTaskDTO> getMobileSubTaskDTO() {
-        return mobileSubTaskDTO;
-    }
-
-    public void setMobileSubTaskDTO(Set<MobileSubTaskDTO> mobileSubTaskDTO) {
-        this.mobileSubTaskDTO = mobileSubTaskDTO;
+    public void setSubTask(Set<SubTask> subTask) {
+        this.subTask = subTask;
     }
 
 }

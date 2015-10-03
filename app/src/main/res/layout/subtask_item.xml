@@ -17,11 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_width="match_parent"
-            android:text="@string/name_example"
-            android:maxLines="1"
-            android:textStyle="bold"
-            android:textSize="20sp" />
-
+            android:text="@string/description_example" />
     </RelativeLayout>
 
 </LinearLayout>
