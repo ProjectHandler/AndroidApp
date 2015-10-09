@@ -1,5 +1,6 @@
 package com.eip.projecthandler.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,32 +8,31 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.blunderer.materialdesignlibrary.activities.Activity;
 import com.eip.projecthandler.R;
 import com.eip.projecthandler.helpers.util;
-import com.eip.projecthandler.models.Ticket;
+import com.eip.projecthandler.models.TicketMessage;
 
 import java.util.List;
 
-public class CustomAdapterTicket extends BaseAdapter {
+public class TicketMessageAdapter extends BaseAdapter {
 
     Context context;
-    List<Ticket> rowItems;
+    List<TicketMessage> rowItems;
 
     /* private view holder class */
     private class ViewHolder {
-        TextView title;
-        TextView status;
-        TextView priority;
-        TextView updatedAt;
+        TextView message;
+        TextView date;
+        TextView autor;
     }
 
-    public CustomAdapterTicket(Context context, List<Ticket> rowItems) {
+    public TicketMessageAdapter(Context context, List<TicketMessage> rowItems) {
         this.context = context;
         this.rowItems = rowItems;
     }
 
-    public void setRowItems(List<Ticket> rowItems) {
+    public void setRowItems(List<TicketMessage> rowItems) {
+        this.rowItems.clear();
         this.rowItems = rowItems;
     }
 
@@ -60,40 +60,28 @@ public class CustomAdapterTicket extends BaseAdapter {
 
 
         if (convertView == null) {
-
-            convertView = mInflater.inflate(R.layout.ticket_item, null);
+            convertView = mInflater.inflate(R.layout.message_ticket_item, null);
             holder = new ViewHolder();
 
-            holder.title = (TextView) convertView.findViewById(R.id.title);
-            holder.status = (TextView) convertView.findViewById(R.id.updatedAt);
-            holder.priority = (TextView) convertView.findViewById(R.id.priority);
-            holder.updatedAt = (TextView) convertView.findViewById(R.id.updatedAt);
+            holder.message = (TextView) convertView.findViewById(R.id.message);
+            holder.date = (TextView) convertView.findViewById(R.id.updatedAt);
+            holder.autor = (TextView) convertView.findViewById(R.id.autor);
+
 
             setViewHolder(convertView, holder, position);
-
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
             setViewHolder(convertView, holder, position);
         }
-
         return convertView;
     }
 
     private void setViewHolder(View convertView, ViewHolder holder, int position) {
-        Ticket row_pos = rowItems.get(position);
-        holder.title.setText(row_pos.getTitle());
+        TicketMessage row_pos = rowItems.get(position);
 
-        if (row_pos.getTicketStatus() == null)
-            holder.status.setText("");
-        else
-            holder.status.setText(row_pos.getTicketStatus().getValue());
-
-        if (row_pos.getTicketPriority() == null)
-            holder.priority.setText("");
-        else
-            holder.priority.setText(row_pos.getTicketPriority().getValue());
-
-        holder.updatedAt.setText(util.getDateString(context, row_pos.getUpdatedAt()));
+        holder.message.setText(row_pos.getText());
+        holder.date.setText(util.getDateString(context, row_pos.getUpdatedAt()));
+        holder.autor.setText(row_pos.getUser().getFirstName() + " " + row_pos.getUser().getLastName());
     }
 }

@@ -42,4 +42,6 @@
     <string name="text_example">text</string>
     <string name="remaining_day_example">D-120</string>
     <string name="task_icon_description">icon for milestone or task</string>
+    <string name="user_example">Jean Machin</string>
+
 </resources>

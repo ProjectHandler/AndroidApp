@@ -2,17 +2,22 @@ package com.eip.projecthandler.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.eip.projecthandler.Adapter.TicketMessageAdapter;
 import com.eip.projecthandler.R;
 import com.eip.projecthandler.models.Ticket;
 
 public class TicketFragment  extends Fragment {
 
     private Ticket ticket;
+    private TicketMessageAdapter ticketMessageAdapter;
+    private ListView lv_mainlist;
 
     public TicketFragment(Ticket ticket) {
         this.ticket = ticket;
@@ -29,6 +34,11 @@ public class TicketFragment  extends Fragment {
 
             TextView tv2 = (TextView) view.findViewById(R.id.tv_ticket_text);
             tv2.setText(ticket.getText());
+
+            Log.d("TaskFragment", "ticket.getTicketMessage(): " + ticket.getTicketMessage());
+            lv_mainlist = (ListView) view.findViewById(R.id.listView_ticketMessage);
+            ticketMessageAdapter = new TicketMessageAdapter(getActivity(), ticket.getTicketMessage());
+            lv_mainlist.setAdapter(ticketMessageAdapter);
         }
 
         return view;

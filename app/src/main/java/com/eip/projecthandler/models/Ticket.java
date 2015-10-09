@@ -3,6 +3,7 @@ package com.eip.projecthandler.models;
 import com.eip.projecthandler.enums.TicketStatus;
 
 import java.util.Date;
+import java.util.List;
 
 public class Ticket {
 
@@ -13,7 +14,7 @@ public class Ticket {
     private Long projectId;
     private TicketTracker ticketTracker;
     private TicketPriority ticketPriority;
-    //private List<User> users = new ArrayList<User>();;
+    private List<TicketMessage> ticketMessage;
     private Date createdAt;
     private Date updatedAt;
 
@@ -77,13 +78,13 @@ public class Ticket {
         this.ticketPriority = ticketPriority;
     }
 
-   /* public List<User> getUsers() {
-        return users;
+    public List<TicketMessage> getTicketMessage() {
+        return ticketMessage;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }*/
+    public void setTicketMessage(List<TicketMessage> ticketMessage) {
+        this.ticketMessage = ticketMessage;
+    }
 
     public Date getCreatedAt() {
         return createdAt;

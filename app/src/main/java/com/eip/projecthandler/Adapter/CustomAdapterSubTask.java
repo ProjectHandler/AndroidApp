@@ -3,6 +3,7 @@ package com.eip.projecthandler.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +65,22 @@ public class CustomAdapterSubTask  extends BaseAdapter {
             holder = new ViewHolder();
             holder.description = (CheckBox) convertView.findViewById(R.id.checkBox_subTask);
 
+           /* holder.description.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    Log.d("TaskFragment", "click holder: " + b);
+
+                }
+            });*/
+
+            holder.description.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //view.geti
+                    Log.d("TaskFragment", "click holder: " + view.getId());
+                }
+            });
+
             setViewHolder(convertView, holder, position);
 
             convertView.setTag(holder);
@@ -81,4 +98,8 @@ public class CustomAdapterSubTask  extends BaseAdapter {
         holder.description.setChecked(row_pos.isValidated());
         holder.description.setText(row_pos.getDescription());
     }
+/* SubTask subTask = (SubTask) adapterView.getItemAtPosition(i);
+                    subTask.setValidated(((CheckBox)view.findViewById(R.id.checkBox_subTask)).isChecked());
+
+                    Log.d("TaskFragment", "subTask: " +subTask.getDescription() + " " + subTask.isValidated());*/
 }

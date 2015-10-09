@@ -16,7 +16,6 @@ import com.blunderer.materialdesignlibrary.models.Account;
 import com.eip.projecthandler.R;
 import com.eip.projecthandler.fragments.HomeFragment;
 import com.eip.projecthandler.fragments.ListProjectFragment;
-import com.eip.projecthandler.fragments.ListTaskFragment;
 import com.eip.projecthandler.fragments.ListTicketFragment;
 import com.eip.projecthandler.helpers.account.AccountHelper;
 import com.eip.projecthandler.helpers.api.AuthenticationHelper;
@@ -80,7 +79,7 @@ public class HomeActivity extends NavigationDrawerActivity implements LogOutList
                 .addItem(R.string.home, R.drawable.ic_add, new HomeFragment())
                 //.addItem(R.string.home, R.drawable.ic_help, new HomeFragment())
                 .addItem(R.string.projects, R.drawable.ic_action_folder, new ListProjectFragment())
-                .addItem(R.string.tasks, R.drawable.ic_action_task, new ListTaskFragment(null, true))
+                //.addItem(R.string.tasks, R.drawable.ic_action_task, new ListTaskFragment(null, true)) <- ???
                 .addItem(R.string.tickets, R.drawable.ic_action_ticket, new ListTicketFragment());
     }
 
