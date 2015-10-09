@@ -44,7 +44,7 @@ public class TaskFragment extends Fragment {
             ProgressBar pb_progress = (ProgressBar) view.findViewById(R.id.progressBar_task_progress);
             pb_progress.setProgress(Integer.parseInt(task.getProgress().toString()));
 
-            Log.d("TaskFragment", "task.getMobileSubTaskDTO(): " + task.getSubTask());
+            Log.d("TaskFragment", "task.getSubTask(): " + task.getSubTask());
             lv_mainlist = (ListView) view.findViewById(R.id.listView_subTasks);
             subTaskAdapter = new CustomAdapterSubTask(getActivity(), task.getSubTask());
             lv_mainlist.setAdapter(subTaskAdapter);
