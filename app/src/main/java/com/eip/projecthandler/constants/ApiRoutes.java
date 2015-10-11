@@ -1,5 +1,7 @@
 package com.eip.projecthandler.constants;
 
+import com.eip.projecthandler.models.SubTask;
+
 public class ApiRoutes {
 
     // Debug mode
@@ -28,6 +30,8 @@ public class ApiRoutes {
     public static final String TASK_GET_BY_PROJECT(long projectId) {return SERVER() + "/task/allByProject/" + projectId;}
     public static final String TASK_GET_BY_PROJECT_AND_USER(long projectId) {return SERVER() + "/task/allByProjectAndUser/" + projectId;}
     public static final String TASK_GET_ALL_BY_USER = SERVER() + "/task/allByUser";
+    public static final String TASK_UPDATE_SUBTASK(SubTask subTask) {return SERVER() + "/task/updateSubTask/"+ subTask.getId() + "/" +
+            subTask.isValidated();}
 
     // Tickets
     public static final String TICKET_GET_BY_PROJECT = SERVER() + "/ticket/allByProject";

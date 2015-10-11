@@ -9,9 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
 import com.eip.projecthandler.R;
+import com.eip.projecthandler.constants.ApiRoutes;
+import com.eip.projecthandler.helpers.api.NetworkHelper;
+import com.eip.projecthandler.listeners.ObejctNetworkListener;
 import com.eip.projecthandler.models.SubTask;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +62,7 @@ public class CustomAdapterSubTask  extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder = null;
 
@@ -65,19 +73,12 @@ public class CustomAdapterSubTask  extends BaseAdapter {
             holder = new ViewHolder();
             holder.description = (CheckBox) convertView.findViewById(R.id.checkBox_subTask);
 
-           /* holder.description.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    Log.d("TaskFragment", "click holder: " + b);
-
-                }
-            });*/
-
             holder.description.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //view.geti
-                    Log.d("TaskFragment", "click holder: " + view.getId());
+                public void onClick(View v) {
+                    CheckBox cb = (CheckBox) v;
+                    SubTask subTask = (SubTask) cb.getTag();
+                    subTask.setValidated(cb.isChecked());
+                    saveSubTaskChanged(subTask);
                 }
             });
 
@@ -97,9 +98,28 @@ public class CustomAdapterSubTask  extends BaseAdapter {
 
         holder.description.setChecked(row_pos.isValidated());
         holder.description.setText(row_pos.getDescription());
+        holder.description.setTag(row_pos);
     }
-/* SubTask subTask = (SubTask) adapterView.getItemAtPosition(i);
-                    subTask.setValidated(((CheckBox)view.findViewById(R.id.checkBox_subTask)).isChecked());
 
-                    Log.d("TaskFragment", "subTask: " +subTask.getDescription() + " " + subTask.isValidated());*/
+    private void saveSubTaskChanged(SubTask subTask) {
+        try {
+            String url = ApiRoutes.TASK_UPDATE_SUBTASK(subTask);
+            NetworkHelper networkHelper = NetworkHelper.getInstance(context.getApplicationContext());
+            networkHelper.retrieveToken(context.getApplicationContext());
+            networkHelper.objectRequestServer(new ObejctNetworkListener() {
+                @Override
+                public void onCallSuccess(JSONObject result) {
+                    Log.d("TaskFragment", "subtask: save success !");
+                }
+
+                @Override
+                public void onCallError(VolleyError error) {
+                    Toast.makeText(context.getApplicationContext(), R.string.save_error, Toast.LENGTH_LONG).show();
+                }
+            }, Request.Method.GET, url);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

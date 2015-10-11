@@ -45,6 +45,7 @@ public class TaskFragment extends Fragment {
             pb_progress.setProgress(Integer.parseInt(task.getProgress().toString()));
 
             Log.d("TaskFragment", "task.getSubTask(): " + task.getSubTask());
+
             lv_mainlist = (ListView) view.findViewById(R.id.listView_subTasks);
             subTaskAdapter = new CustomAdapterSubTask(getActivity(), task.getSubTask());
             lv_mainlist.setAdapter(subTaskAdapter);

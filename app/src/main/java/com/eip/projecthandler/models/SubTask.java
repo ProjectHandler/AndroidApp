@@ -2,6 +2,7 @@ package com.eip.projecthandler.models;
 
 public class SubTask {
 
+    private Long id;
     private String description;
     private Task parentTask;
     private User lastUserActivity;
@@ -9,7 +10,14 @@ public class SubTask {
     private boolean taken;
 
     public SubTask() {
-        this.description = "test 1";
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescription() {
