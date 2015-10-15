@@ -1,23 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:id="@+id/relativeLayout1"
+        android:id="@+id/relativeLayout2"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
         <CheckBox
-            android:id="@+id/checkBox_subTask"
+            android:id="@+id/checkbox_subtask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_take_task"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/description"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
             android:layout_width="match_parent"
-            android:text="@string/description_example" />
+            android:text="@string/description_example"
+            android:textSize="16sp"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentStart="false"
+            android:layout_toLeftOf="@+id/checkbox_subtask"
+            android:layout_alignBaseline="@+id/checkbox_subtask"/>
+    </RelativeLayout>
+</LinearLayout>-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/relativeLayout2"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/relativeLayout3"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true">
+
+        <CheckBox
+            android:id="@+id/checkbox_subtask_taken"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_take_task"
+            android:textSize="16sp"/>
+
+        <CheckBox
+            android:id="@+id/checkbox_subtask_finished"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_finished_task"
+            android:layout_below="@+id/checkbox_subtask_taken"
+            android:textSize="16sp"/>
+
     </RelativeLayout>
 
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_width="match_parent"
+            android:text="@string/description_example"
+            android:textSize="16sp"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentStart="false"
+            android:layout_toLeftOf="@+id/relativeLayout3"
+            android:layout_alignBaseline="@+id/relativeLayout3"/>
+    </RelativeLayout>
 </LinearLayout>

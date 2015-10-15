@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -32,7 +33,9 @@ public class CustomAdapterSubTask  extends BaseAdapter {
 
     /* private view holder class */
     private class ViewHolder {
-        CheckBox description;
+        CheckBox taken;
+        CheckBox finished;
+        TextView description;
     }
 
     public CustomAdapterSubTask(Context context, Set<SubTask> rowItems) {
@@ -71,14 +74,39 @@ public class CustomAdapterSubTask  extends BaseAdapter {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.subtask_item, null);
             holder = new ViewHolder();
-            holder.description = (CheckBox) convertView.findViewById(R.id.checkBox_subTask);
+            holder.taken = (CheckBox) convertView.findViewById(R.id.checkbox_subtask_taken);
+            holder.finished = (CheckBox) convertView.findViewById(R.id.checkbox_subtask_finished);
+            holder.description = (TextView) convertView.findViewById(R.id.description);
 
-            holder.description.setOnClickListener(new View.OnClickListener() {
+            holder.taken.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     CheckBox cb = (CheckBox) v;
                     SubTask subTask = (SubTask) cb.getTag();
-                    subTask.setValidated(cb.isChecked());
-                    saveSubTaskChanged(subTask);
+
+                    if (subTask.isValidated() == false) {
+                        subTask.setTaken(cb.isChecked());
+
+                        saveSubTaskChanged(subTask);
+                    } else {
+                        subTask.setTaken(true);
+                        cb.setChecked(true);
+                    }
+                }
+            });
+
+            holder.finished.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    CheckBox cb = (CheckBox) v;
+                    SubTask subTask = (SubTask) cb.getTag();
+
+                    if (subTask.isTaken() == false) {
+                        subTask.setValidated(false);
+                        cb.setChecked(false);
+                    } else if (subTask.isTaken() == true) {
+                        subTask.setTaken(true);
+                        subTask.setValidated(cb.isChecked());
+                        saveSubTaskChanged(subTask);
+                    }
                 }
             });
 
@@ -96,14 +124,17 @@ public class CustomAdapterSubTask  extends BaseAdapter {
     private void setViewHolder(View convertView, ViewHolder holder, int position) {
         SubTask row_pos = rowItems.get(position);
 
-        holder.description.setChecked(row_pos.isValidated());
+        holder.taken.setChecked(row_pos.isTaken());
+        holder.taken.setTag(row_pos);
+        holder.finished.setChecked(row_pos.isValidated());
+        holder.finished.setTag(row_pos);
         holder.description.setText(row_pos.getDescription());
-        holder.description.setTag(row_pos);
+
     }
 
     private void saveSubTaskChanged(SubTask subTask) {
         try {
-            String url = ApiRoutes.TASK_UPDATE_SUBTASK(subTask);
+            String url = ApiRoutes.TASK_UPDATE_SUBTASK_STATUS(subTask);
             NetworkHelper networkHelper = NetworkHelper.getInstance(context.getApplicationContext());
             networkHelper.retrieveToken(context.getApplicationContext());
             networkHelper.objectRequestServer(new ObejctNetworkListener() {

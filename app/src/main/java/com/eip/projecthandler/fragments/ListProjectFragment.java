@@ -72,7 +72,7 @@ public class ListProjectFragment extends com.blunderer.materialdesignlibrary.fra
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        ProjectFragment projectFragment = new ProjectFragment((Project) adapterView.getItemAtPosition(position));
+        ProjectFragment projectFragment = ProjectFragment.newInstance((Project) adapterView.getItemAtPosition(position));
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

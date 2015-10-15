@@ -9,8 +9,8 @@ public class ApiRoutes {
 
     // Servers
     private static final String SERVER_PROD = "http://163.5.84.233:8080/projecthandler/api";
-    //private static final String SERVER_DEV = "http://192.168.1.8:8080/projecthandler/api";
-    private static final String SERVER_DEV = "http://192.168.1.94:8080/projecthandler/api";
+    private static final String SERVER_DEV = "http://192.168.1.8:8080/projecthandler/api";
+    //private static final String SERVER_DEV = "http://192.168.1.94:8080/projecthandler/api";
 
     public static String SERVER() {
         return DEBUG ? SERVER_DEV : SERVER_PROD;
@@ -30,8 +30,8 @@ public class ApiRoutes {
     public static final String TASK_GET_BY_PROJECT(long projectId) {return SERVER() + "/task/allByProject/" + projectId;}
     public static final String TASK_GET_BY_PROJECT_AND_USER(long projectId) {return SERVER() + "/task/allByProjectAndUser/" + projectId;}
     public static final String TASK_GET_ALL_BY_USER = SERVER() + "/task/allByUser";
-    public static final String TASK_UPDATE_SUBTASK(SubTask subTask) {return SERVER() + "/task/updateSubTask/"+ subTask.getId() + "/" +
-            subTask.isValidated();}
+    public static final String TASK_UPDATE_SUBTASK_STATUS(SubTask subTask) {return SERVER() + "/task/updateSubTask/"+ subTask.getId() + "/" +
+           subTask.isTaken() + "/" + subTask.isValidated();}
 
     // Tickets
     public static final String TICKET_GET_BY_PROJECT = SERVER() + "/ticket/allByProject";

@@ -25,7 +25,19 @@ public class TaskFragment extends Fragment {
     private Button btn_tickets;
     private Button btn_my_tickets;
 
-    public TaskFragment(Task task) {
+    public static final TaskFragment newInstance(Task task) {
+        TaskFragment f = new TaskFragment();
+        Bundle bdl = new Bundle();
+        f.setTask(task);
+        f.setArguments(bdl);
+        return f;
+    }
+
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
         this.task = task;
     }
 
@@ -69,7 +81,7 @@ public class TaskFragment extends Fragment {
     }
 
     private void loadTickets(Boolean onlyUserTickets) {
-        ListTicketFragment listTicketFragment = new ListTicketFragment(task.getId(), onlyUserTickets);
+        ListTicketFragment listTicketFragment = ListTicketFragment.newInstance(task.getId(), onlyUserTickets);
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

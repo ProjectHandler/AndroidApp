@@ -1,5 +1,6 @@
 package com.eip.projecthandler.fragments;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -31,11 +32,28 @@ public class ListTicketFragment extends com.blunderer.materialdesignlibrary.frag
     private List<Ticket> listTickets;
     private CustomAdapterTicket ticketAdapter;
 
-    public ListTicketFragment() {
+    public static final ListTicketFragment newInstance(Long taskId, Boolean onlyUserTicket) {
+        ListTicketFragment f = new ListTicketFragment();
+        Bundle bdl = new Bundle();
+        f.setTaskId(taskId);
+        f.setOnlyUserTicket(onlyUserTicket);
+        f.setArguments(bdl);
+        return f;
     }
 
-    public ListTicketFragment(Long taskId, Boolean onlyUserTicket) {
+    public Long getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(Long taskId) {
         this.taskId = taskId;
+    }
+
+    public Boolean getOnlyUserTicket() {
+        return onlyUserTicket;
+    }
+
+    public void setOnlyUserTicket(Boolean onlyUserTicket) {
         this.onlyUserTicket = onlyUserTicket;
     }
 
@@ -83,7 +101,7 @@ public class ListTicketFragment extends com.blunderer.materialdesignlibrary.frag
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        TicketFragment ticketFragment = new TicketFragment((Ticket) adapterView.getItemAtPosition(position));
+        TicketFragment ticketFragment = TicketFragment.newInstance((Ticket) adapterView.getItemAtPosition(position));
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

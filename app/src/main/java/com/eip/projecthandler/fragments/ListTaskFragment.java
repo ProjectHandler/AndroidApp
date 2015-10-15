@@ -1,5 +1,6 @@
 package com.eip.projecthandler.fragments;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -31,8 +32,28 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
     private Long projectId;
     private Boolean onlyUserTask = false;
 
-    public ListTaskFragment(Long projectId, Boolean onlyUserTask) {
+    public static final ListTaskFragment newInstance(Long projectId, Boolean onlyUserTask) {
+        ListTaskFragment f = new ListTaskFragment();
+        Bundle bdl = new Bundle();
+        f.setProjectId(projectId);
+        f.setOnlyUserTask(onlyUserTask);
+        f.setArguments(bdl);
+        return f;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
         this.projectId = projectId;
+    }
+
+    public Boolean getOnlyUserTask() {
+        return onlyUserTask;
+    }
+
+    public void setOnlyUserTask(Boolean onlyUserTask) {
         this.onlyUserTask = onlyUserTask;
     }
 
@@ -81,7 +102,7 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        TaskFragment taskFragment = new TaskFragment((Task) adapterView.getItemAtPosition(position));
+        TaskFragment taskFragment =TaskFragment.newInstance((Task) adapterView.getItemAtPosition(position));
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

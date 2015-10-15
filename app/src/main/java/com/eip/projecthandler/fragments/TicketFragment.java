@@ -19,8 +19,13 @@ public class TicketFragment  extends Fragment {
     private TicketMessageAdapter ticketMessageAdapter;
     private ListView lv_mainlist;
 
-    public TicketFragment(Ticket ticket) {
-        this.ticket = ticket;
+
+    public static final TicketFragment newInstance(Ticket ticket) {
+        TicketFragment f = new TicketFragment();
+        Bundle bdl = new Bundle();
+        f.setTicket(ticket);
+        f.setArguments(bdl);
+        return f;
     }
 
     @Override

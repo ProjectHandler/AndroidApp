@@ -22,11 +22,23 @@ public class ProjectFragment extends Fragment {
     private Button btn_tasks;
     private Button btn_my_tasks;
 
-    public ProjectFragment(Project project) {
+    public static final ProjectFragment newInstance(Project project) {
+        ProjectFragment f = new ProjectFragment();
+        Bundle bdl = new Bundle();
+        f.setProject(project);
+        f.setArguments(bdl);
+        return f;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
         this.project = project;
     }
 
-   @Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
        super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_project, container, false);
@@ -69,7 +81,8 @@ public class ProjectFragment extends Fragment {
     }
 
     private void loadTask(Boolean onlyUserTask) {
-        ListTaskFragment listTaskFragment = new ListTaskFragment(project.getId(), onlyUserTask);
+        ListTaskFragment listTaskFragment = ListTaskFragment.newInstance(project.getId(), onlyUserTask);
+
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
