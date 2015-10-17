@@ -76,7 +76,8 @@
             android:tint="#66944a"
             android:id="@+id/buttonSend"
             android:background="@drawable/abc_btn_borderless_material"
-            android:layout_alignTop="@+id/chatText"/>
+            android:layout_alignTop="@+id/chatText"
+            />
     </RelativeLayout>
 
 </RelativeLayout>

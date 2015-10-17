@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -56,25 +58,15 @@ public class TaskFragment extends Fragment {
             ProgressBar pb_progress = (ProgressBar) view.findViewById(R.id.progressBar_task_progress);
             pb_progress.setProgress(Integer.parseInt(task.getProgress().toString()));
 
-            Log.d("TaskFragment", "task.getSubTask(): " + task.getSubTask());
-
-            lv_mainlist = (ListView) view.findViewById(R.id.listView_subTasks);
-            subTaskAdapter = new CustomAdapterSubTask(getActivity(), task.getSubTask());
-            lv_mainlist.setAdapter(subTaskAdapter);
-
-            btn_tickets = (Button) view.findViewById(R.id.tickets);
-            btn_tickets.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View arg0) {
-                    loadTickets(false);
-                }
-            });
-
-            btn_my_tickets = (Button) view.findViewById(R.id.my_tickets);
-            btn_my_tickets.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View arg0) {
-                    loadTickets(true);
-                }
-            });
+            if (task.getLevel() > 1) {
+                Log.d("TaskFragment", "task.getSubTask(): " + task.getSubTask());
+                lv_mainlist = (ListView) view.findViewById(R.id.listView_subTasks);
+                subTaskAdapter = new CustomAdapterSubTask(getActivity(), task.getSubTask());
+                lv_mainlist.setAdapter(subTaskAdapter);
+            } else {
+                LinearLayout entry = (LinearLayout) view.findViewById(R.id.subTaskLayout);
+                ((ViewManager) entry.getParent()).removeView(entry);
+            }
         }
 
         return view;

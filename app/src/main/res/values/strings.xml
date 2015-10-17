@@ -16,6 +16,7 @@
     <string name="projects">Projects</string>
     <string name="tickets">My tickets</string>
     <string name="tasks">Tasks</string>
+    <string name="settings">Settings</string>
 
     <!-- button -->
     <string name="button_tasks">Tasks</string>

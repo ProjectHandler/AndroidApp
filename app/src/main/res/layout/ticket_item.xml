@@ -53,14 +53,5 @@
             android:layout_alignParentRight="true"
             android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/updatedAt"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_width="match_parent"
-            android:layout_toLeftOf="@+id/updatedAt"
-            android:text="@string/date_example"
-            android:maxLines="1"
-            android:textSize="16sp"/>
     </RelativeLayout>
 </LinearLayout>

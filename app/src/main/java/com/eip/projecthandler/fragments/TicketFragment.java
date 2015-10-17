@@ -44,6 +44,7 @@ public class TicketFragment  extends Fragment {
             lv_mainlist = (ListView) view.findViewById(R.id.listView_ticketMessage);
             ticketMessageAdapter = new TicketMessageAdapter(getActivity(), ticket.getTicketMessage());
             lv_mainlist.setAdapter(ticketMessageAdapter);
+
         }
 
         return view;

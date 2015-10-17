@@ -1,10 +1,12 @@
 package com.eip.projecthandler.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.blunderer.materialdesignlibrary.activities.Activity;
@@ -25,6 +27,7 @@ public class CustomAdapterTicket extends BaseAdapter {
         TextView status;
         TextView priority;
         TextView updatedAt;
+        ImageButton send;
     }
 
     public CustomAdapterTicket(Context context, List<Ticket> rowItems) {
@@ -69,6 +72,9 @@ public class CustomAdapterTicket extends BaseAdapter {
             holder.priority = (TextView) convertView.findViewById(R.id.priority);
             holder.updatedAt = (TextView) convertView.findViewById(R.id.updatedAt);
 
+            holder.send = (ImageButton) convertView.findViewById(R.id.buttonSend);
+
+
             setViewHolder(convertView, holder, position);
 
             convertView.setTag(holder);
@@ -89,11 +95,14 @@ public class CustomAdapterTicket extends BaseAdapter {
         else
             holder.status.setText(row_pos.getTicketStatus().getValue());
 
-        if (row_pos.getTicketPriority() == null)
-            holder.priority.setText("");
-        else
-            holder.priority.setText(row_pos.getTicketPriority().getValue());
+        Log.d("CustomAdapterTicket", "row_pos.getTicketPriority(): " + row_pos.getTicketPriority());
+        //if (row_pos.getTicketPriority() == null)
+            holder.priority.setText("Medium");
+        //else
+        //    holder.priority.setText(row_pos.getTicketPriority().getValue());
 
         holder.updatedAt.setText(util.getDateString(context, row_pos.getUpdatedAt()));
+
+       // holder.send.setImageResource(R);
     }
 }

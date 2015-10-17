@@ -86,13 +86,16 @@ public class HomeActivity extends NavigationDrawerActivity implements LogOutList
     @Override
     public NavigationDrawerBottomHandler getNavigationDrawerBottomHandler() {
         return new NavigationDrawerBottomHandler(this)
+                .addItem(R.string.settings, R.drawable.ic_settings, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                })
                 .addItem(R.string.log_out, R.drawable.ic_action_logout, new View.OnClickListener() {
-
                     @Override
                     public void onClick(View v) {
                         AuthenticationHelper.logOut(HomeActivity.this, HomeActivity.this);
                     }
-
                 });
     }
 

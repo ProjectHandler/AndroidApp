@@ -82,7 +82,8 @@
         android:layout_marginBottom="5dp"
         android:background="#ffe8e8e8"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:paddingRight="10dp"
+        android:id="@+id/subTaskLayout">
 
         <TextView
             android:layout_width="wrap_content"
@@ -99,38 +100,7 @@
             android:id="@+id/listView_subTasks"
             android:focusable="false"
             android:choiceMode="multipleChoice" />
-
-
-
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="#ffe8e8e8">
-
-        <Button
-            android:id="@+id/tickets"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button_tickets"
-            android:layout_marginLeft="5dp"
-            />
-
-        <Button
-            android:id="@+id/my_tickets"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button_my_tickets"
-            android:layout_marginRight="5dp" />
-
-    </LinearLayout>
 
 </LinearLayout>
