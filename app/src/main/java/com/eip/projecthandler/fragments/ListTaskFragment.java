@@ -121,14 +121,11 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
     private void getListOfTask() {
         try {
             String url;
-            if (this.projectId == null) {
-                url = ApiRoutes.TASK_GET_ALL_BY_USER;
-            } else {
-                if (this.onlyUserTask)
-                    url = ApiRoutes.TASK_GET_BY_PROJECT_AND_USER(this.projectId);
-                else
-                    url = ApiRoutes.TASK_GET_BY_PROJECT(this.projectId);
-            }
+            if (this.onlyUserTask)
+                url = ApiRoutes.TASK_GET_BY_PROJECT_AND_USER(this.projectId);
+            else
+                url = ApiRoutes.TASK_GET_BY_PROJECT(this.projectId);
+
             Log.d("ListTaskFragment", "url: " + url);
             NetworkHelper networkHelper = NetworkHelper.getInstance(getActivity());
             networkHelper.retrieveToken(getActivity());

@@ -118,6 +118,4 @@ public class ListProjectFragment extends com.blunderer.materialdesignlibrary.fra
             e.printStackTrace();
         }
     }
-
-
 }

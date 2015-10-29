@@ -29,7 +29,6 @@ public class ApiRoutes {
     //Tasks
     public static final String TASK_GET_BY_PROJECT(long projectId) {return SERVER() + "/task/allByProject/" + projectId;}
     public static final String TASK_GET_BY_PROJECT_AND_USER(long projectId) {return SERVER() + "/task/allByProjectAndUser/" + projectId;}
-    public static final String TASK_GET_ALL_BY_USER = SERVER() + "/task/allByUser";
     public static final String TASK_UPDATE_SUBTASK_STATUS(SubTask subTask) {return SERVER() + "/task/updateSubTask/"+ subTask.getId() + "/" +
            subTask.isTaken() + "/" + subTask.isValidated();}
 

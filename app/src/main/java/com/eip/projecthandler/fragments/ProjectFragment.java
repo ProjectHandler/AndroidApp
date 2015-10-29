@@ -40,41 +40,41 @@ public class ProjectFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_project, container, false);
 
-       if (project !=null) {
-           TextView tvProjectName           = (TextView) view.findViewById(R.id.tv_project_name);
-           TextView tvProjectDescription    = (TextView) view.findViewById(R.id.tv_project_description);
-           TextView tvDateBegin             = (TextView) view.findViewById(R.id.date_begin);
-           TextView tvDateEnd               = (TextView) view.findViewById(R.id.date_end);
-           ProgressBar pbDeadline           = (ProgressBar) view.findViewById(R.id.progressBar_project_deadline);
-           ProgressBar pbProgress           = (ProgressBar) view.findViewById(R.id.progressBar_project_progress);
+        if (project != null) {
+            TextView tvProjectName = (TextView) view.findViewById(R.id.tv_project_name);
+            TextView tvProjectDescription = (TextView) view.findViewById(R.id.tv_project_description);
+            TextView tvDateBegin = (TextView) view.findViewById(R.id.date_begin);
+            TextView tvDateEnd = (TextView) view.findViewById(R.id.date_end);
+            ProgressBar pbDeadline = (ProgressBar) view.findViewById(R.id.progressBar_project_deadline);
+            ProgressBar pbProgress = (ProgressBar) view.findViewById(R.id.progressBar_project_progress);
 
-           tvProjectName.setText(project.getName());
-           tvProjectDescription.setText(project.getDescription());
-           tvDateBegin.setText(util.getDateString(getActivity().getApplicationContext(), project.getDateBegin()));
-           tvDateEnd.setText(util.getDateString(getActivity().getApplicationContext(), project.getDateEnd()));
+            tvProjectName.setText(project.getName());
+            tvProjectDescription.setText(project.getDescription());
+            tvDateBegin.setText(util.getDateString(getActivity().getApplicationContext(), project.getDateBegin()));
+            tvDateEnd.setText(util.getDateString(getActivity().getApplicationContext(), project.getDateEnd()));
 
-           pbDeadline.setProgress(project.getDateProgress());
-           pbProgress.setProgress(project.getTasksProgress());
+            pbDeadline.setProgress(project.getDateProgress());
+            pbProgress.setProgress(project.getTasksProgress());
 
-           btn_tasks = (Button) view.findViewById(R.id.tasks);
-           btn_tasks.setOnClickListener(new View.OnClickListener() {
-               public void onClick(View arg0) {
-                   loadTask(false);
-               }
-           });
+            btn_tasks = (Button) view.findViewById(R.id.tasks);
+            btn_tasks.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View arg0) {
+                    loadTask(false);
+                }
+            });
 
-           btn_my_tasks = (Button) view.findViewById(R.id.my_tasks);
-           btn_my_tasks.setOnClickListener(new View.OnClickListener() {
-               public void onClick(View arg0) {
-                   loadTask(true);
-               }
-           });
+            btn_my_tasks = (Button) view.findViewById(R.id.my_tasks);
+            btn_my_tasks.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View arg0) {
+                    loadTask(true);
+                }
+            });
 
-           ((HomeActivity)getActivity()).getSupportActionBar().setTitle(project.getName().toString());
-       }
+            ((HomeActivity) getActivity()).getSupportActionBar().setTitle(project.getName().toString());
+        }
 
 
         return view;
