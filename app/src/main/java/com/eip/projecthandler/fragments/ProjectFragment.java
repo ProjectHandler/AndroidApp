@@ -21,6 +21,9 @@ public class ProjectFragment extends Fragment {
     private Project project;
     private Button btn_tasks;
     private Button btn_my_tasks;
+    private Button btn_tickets;
+    private Button btn_my_tickets;
+
 
     public static final ProjectFragment newInstance(Project project) {
         ProjectFragment f = new ProjectFragment();
@@ -62,14 +65,28 @@ public class ProjectFragment extends Fragment {
             btn_tasks = (Button) view.findViewById(R.id.tasks);
             btn_tasks.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View arg0) {
-                    loadTask(false);
+                    loadTasks(false);
                 }
             });
 
             btn_my_tasks = (Button) view.findViewById(R.id.my_tasks);
             btn_my_tasks.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View arg0) {
-                    loadTask(true);
+                    loadTasks(true);
+                }
+            });
+
+            btn_tickets = (Button) view.findViewById(R.id.tickets);
+            btn_tickets.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View arg0) {
+                    loadTickets(false);
+                }
+            });
+
+            btn_my_tickets = (Button) view.findViewById(R.id.my_tickets);
+            btn_my_tickets.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View arg0) {
+                    loadTickets(true);
                 }
             });
 
@@ -80,15 +97,26 @@ public class ProjectFragment extends Fragment {
         return view;
     }
 
-    private void loadTask(Boolean onlyUserTask) {
-        ListTaskFragment listTaskFragment = ListTaskFragment.newInstance(project.getId(), onlyUserTask);
-
+    private void loadTasks(Boolean onlyUserTasks) {
+        ListTaskFragment listTaskFragment = ListTaskFragment.newInstance(project.getId(), onlyUserTasks);
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.remove(this);
         fragmentTransaction.replace(R.id.fragment_container, listTaskFragment);
+        fragmentTransaction.addToBackStack(this.toString());
+        fragmentTransaction.commit();
+    }
+
+    private void loadTickets(Boolean onlyUserTickets) {
+        ListTicketFragment listTicketFragment = ListTicketFragment.newInstance(project.getId(), onlyUserTickets);
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.remove(this);
+        fragmentTransaction.replace(R.id.fragment_container, listTicketFragment);
         fragmentTransaction.addToBackStack(this.toString());
         fragmentTransaction.commit();
     }

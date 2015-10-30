@@ -27,26 +27,26 @@ import java.util.List;
 
 public class ListTicketFragment extends com.blunderer.materialdesignlibrary.fragments.ListViewFragment {
 
-    private Long taskId;
+    private Long projectId;
     private Boolean onlyUserTicket;
     private List<Ticket> listTickets;
     private CustomAdapterTicket ticketAdapter;
 
-    public static final ListTicketFragment newInstance(Long taskId, Boolean onlyUserTicket) {
+    public static final ListTicketFragment newInstance(Long projectId, Boolean onlyUserTicket) {
         ListTicketFragment f = new ListTicketFragment();
         Bundle bdl = new Bundle();
-        f.setTaskId(taskId);
+        f.setProjectId(projectId);
         f.setOnlyUserTicket(onlyUserTicket);
         f.setArguments(bdl);
         return f;
     }
 
-    public Long getTaskId() {
-        return taskId;
+    public Long getProjectId() {
+        return projectId;
     }
 
-    public void setTaskId(Long taskId) {
-        this.taskId = taskId;
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 
     public Boolean getOnlyUserTicket() {
@@ -120,6 +120,12 @@ public class ListTicketFragment extends com.blunderer.materialdesignlibrary.frag
     private void getListOfTicket() {
         try {
             String url = ApiRoutes.TICKET_GET_BY_USER;
+            if (projectId != null && this.onlyUserTicket)
+                url = ApiRoutes.TICKET_GET_BY_PROJECT_AND_USER(this.projectId);
+            else if (projectId != null && !this.onlyUserTicket)
+                url = ApiRoutes.TICKET_GET_BY_PROJECT(this.projectId);
+            else
+               url = ApiRoutes.TICKET_GET_BY_USER;
 
             NetworkHelper networkHelper = NetworkHelper.getInstance(getActivity());
             networkHelper.retrieveToken(getActivity());

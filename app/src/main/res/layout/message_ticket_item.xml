@@ -3,7 +3,8 @@
               android:layout_height="wrap_content"
               android:orientation="vertical"
               android:paddingLeft="5dp"
-              android:paddingRight="5dp">
+              android:paddingRight="5dp"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,10 +21,8 @@
             android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:text="@string/description_example"
-            android:maxLines="1"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:ellipsize="end" />
+            android:textStyle="normal"
+            />
 
     </RelativeLayout>
 
@@ -45,7 +44,7 @@
             android:layout_toLeftOf="@+id/updatedAt"
             android:text="@string/user_example"
             android:maxLines="1"
-            android:textSize="16sp"
+            android:textSize="10sp"
             android:ellipsize="end" />
 
         <TextView
@@ -55,7 +54,7 @@
             android:text="@string/date_example"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:textSize="16sp"/>
+            android:textSize="10sp"/>
 
     </RelativeLayout>
 </LinearLayout>

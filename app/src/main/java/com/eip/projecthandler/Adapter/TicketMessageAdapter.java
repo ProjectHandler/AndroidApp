@@ -68,6 +68,7 @@ public class TicketMessageAdapter extends BaseAdapter {
             holder.autor = (TextView) convertView.findViewById(R.id.autor);
 
 
+
             setViewHolder(convertView, holder, position);
             convertView.setTag(holder);
         } else {

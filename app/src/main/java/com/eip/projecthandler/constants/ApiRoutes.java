@@ -33,8 +33,8 @@ public class ApiRoutes {
            subTask.isTaken() + "/" + subTask.isValidated();}
 
     // Tickets
-    public static final String TICKET_GET_BY_PROJECT = SERVER() + "/ticket/allByProject";
-    public static final String TICKET_GET_BY_USER = SERVER() + "/ticket/allByUser";
+    public static final String TICKET_GET_BY_PROJECT(long projectId) {return SERVER() + "/ticket/allByProject/"+projectId;}
+    public static final String TICKET_GET_BY_USER = SERVER() + "/ticket/allByCurrentUser";
     public static final String TICKET_GET_BY_PROJECT_AND_USER(long projectId) {return SERVER() + "/ticket/allByProjectAndUser/" + projectId;}
 
 }

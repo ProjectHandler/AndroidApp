@@ -30,13 +30,13 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
     private List<Task> listTasks;
     private CustomAdapterTask taskAdapter;
     private Long projectId;
-    private Boolean onlyUserTask = false;
+    private Boolean onlyUserTasks = false;
 
-    public static final ListTaskFragment newInstance(Long projectId, Boolean onlyUserTask) {
+    public static final ListTaskFragment newInstance(Long projectId, Boolean onlyUserTasks) {
         ListTaskFragment f = new ListTaskFragment();
         Bundle bdl = new Bundle();
         f.setProjectId(projectId);
-        f.setOnlyUserTask(onlyUserTask);
+        f.setOnlyUserTasks(onlyUserTasks);
         f.setArguments(bdl);
         return f;
     }
@@ -49,12 +49,12 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
         this.projectId = projectId;
     }
 
-    public Boolean getOnlyUserTask() {
-        return onlyUserTask;
+    public Boolean getOnlyUserTasks() {
+        return onlyUserTasks;
     }
 
-    public void setOnlyUserTask(Boolean onlyUserTask) {
-        this.onlyUserTask = onlyUserTask;
+    public void setOnlyUserTasks(Boolean onlyUserTasks) {
+        this.onlyUserTasks = onlyUserTasks;
     }
 
     @Override
@@ -121,7 +121,7 @@ public class ListTaskFragment extends com.blunderer.materialdesignlibrary.fragme
     private void getListOfTask() {
         try {
             String url;
-            if (this.onlyUserTask)
+            if (this.onlyUserTasks)
                 url = ApiRoutes.TASK_GET_BY_PROJECT_AND_USER(this.projectId);
             else
                 url = ApiRoutes.TASK_GET_BY_PROJECT(this.projectId);

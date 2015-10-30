@@ -2,7 +2,6 @@ package com.eip.projecthandler.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,10 +85,10 @@ public class CustomAdapterTask extends BaseAdapter {
         holder.progress.setText(row_pos.getProgress().toString() + "%");
 
         if (row_pos.getLevel() == 1) {
-            holder.icon.setImageResource(R.drawable.ic_action_task);
+            holder.icon.setImageResource(R.drawable.ic_ph_bookmark_2);
             convertView.setPadding((int) (5 * density), (int) (5 * density), (int) (5 * density), (int) (5 * density));
         } else if (row_pos.getLevel() == 2) {
-            holder.icon.setImageResource(R.drawable.ic_action_task2);
+            holder.icon.setImageResource(R.drawable.ic_ph_clipboard);
             convertView.setPadding((int) (30 * density), 0, (int) (5 * density), (int) (5 * density));
         } else {
             convertView.setPadding((int) (5 * density), (int) (5 * density), (int) (5 * density), (int) (5 * density));

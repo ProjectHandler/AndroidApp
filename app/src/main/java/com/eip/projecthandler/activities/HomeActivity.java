@@ -78,20 +78,20 @@ public class HomeActivity extends NavigationDrawerActivity implements LogOutList
         return new NavigationDrawerTopHandler(this)
                 .addItem(R.string.home, R.drawable.ic_add, new HomeFragment())
                 //.addItem(R.string.home, R.drawable.ic_help, new HomeFragment())
-                .addItem(R.string.projects, R.drawable.ic_action_folder, new ListProjectFragment())
+                .addItem(R.string.projects, R.drawable.ic_ph_folder_2, new ListProjectFragment())
                 //.addItem(R.string.tasks, R.drawable.ic_action_task, new ListTaskFragment(null, true)) <- ???
-                .addItem(R.string.tickets, R.drawable.ic_action_ticket, new ListTicketFragment());
+                .addItem(R.string.tickets, R.drawable.ic_ph_email, new ListTicketFragment());
     }
 
     @Override
     public NavigationDrawerBottomHandler getNavigationDrawerBottomHandler() {
         return new NavigationDrawerBottomHandler(this)
-                .addItem(R.string.settings, R.drawable.ic_settings, new View.OnClickListener() {
+                .addItem(R.string.settings, R.drawable.ic_ph_setting, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                     }
                 })
-                .addItem(R.string.log_out, R.drawable.ic_action_logout, new View.OnClickListener() {
+                .addItem(R.string.log_out, R.drawable.ic_ph_power, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         AuthenticationHelper.logOut(HomeActivity.this, HomeActivity.this);
