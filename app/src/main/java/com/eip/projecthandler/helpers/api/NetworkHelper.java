@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -82,135 +83,96 @@ public class NetworkHelper {
      * @param obejctNetworkListener The network listener.
      * @param method                The method used. Must be like Request.Method.?
      * @param url                   The url.
+     * @parm jsonObj                The data obj send with post request
      * @throws AuthenticationException
      */
-    public void objectRequestServer(final ObejctNetworkListener obejctNetworkListener, int method, String url) {
-        if (!TextUtils.isEmpty(mAuthToken)) {
-            objectRequestServerWithToken(obejctNetworkListener, method, url);
-            return;
+    public void objectRequestServer(final ObejctNetworkListener obejctNetworkListener, int method, String url, JSONObject jsonObj) {
+        if (!TextUtils.isEmpty(mAuthToken))
+            url = url + "?token=" + mAuthToken;
+
+        JsonObjectRequest request;
+        if (jsonObj != null && method == Request.Method.POST) {
+            request = new JsonObjectRequest(method, url, jsonObj, getOjectResponceSuccessListener(obejctNetworkListener), getObjectResponceErrorListener(obejctNetworkListener)) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    if (!TextUtils.isEmpty(mAuthToken))
+                        params.put("token", mAuthToken);
+                    return params;
+                }
+            };
+        } else {
+            request = new JsonObjectRequest(method, url, getOjectResponceSuccessListener(obejctNetworkListener), getObjectResponceErrorListener(obejctNetworkListener)) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    if (!TextUtils.isEmpty(mAuthToken))
+                        params.put("token", mAuthToken);
+                    return params;
+                }
+            };
         }
-
-        JsonObjectRequest request = new JsonObjectRequest(method, url,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        if (obejctNetworkListener != null) try {
-                            obejctNetworkListener.onCallSuccess(response);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if (obejctNetworkListener != null) obejctNetworkListener.onCallError(error);
-                    }
-
-                });
         mRequestQueue.add(request);
     }
 
-    /**
-     * Calls the server with the user authentication token.
-     * Will call back LogInListener.onAuthenticateSuccess
-     * or LogInListener.onAuthenticateError.
-     *
-     * @param obejctNetworkListener The network listener.
-     * @param method                The method used. Must be like Request.Method.?
-     * @param url                   The url.
-     * @throws AuthenticationException
-     */
-    private void objectRequestServerWithToken(final ObejctNetworkListener obejctNetworkListener, int method, String url) {
-        url = url + "?token=" + mAuthToken;
-        JsonObjectRequest request = new JsonObjectRequest(method, url,
-                new Response.Listener<JSONObject>() {
+    public void arrayRequestServer(final ArrayNetworkListener arrayNetworkListener, int method, String url, JSONObject jsonObj) {
+        if (!TextUtils.isEmpty(mAuthToken))
+            url = url + "?token=" + mAuthToken;
 
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        if (obejctNetworkListener != null) try {
-                            obejctNetworkListener.onCallSuccess(response);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
+        JsonArrayRequest  request;
+        if (jsonObj != null && method == Request.Method.POST)
+            request = new JsonArrayRequest(method, url, jsonObj, getArrayResponceSuccessListener(arrayNetworkListener), getArrayResponceErrorListener(arrayNetworkListener));
+        else
+            request = new JsonArrayRequest(method, url, getArrayResponceSuccessListener(arrayNetworkListener), getArrayResponceErrorListener(arrayNetworkListener));
 
-                },
-                new Response.ErrorListener() {
+        mRequestQueue.add(request);
+    }
 
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if (obejctNetworkListener != null) obejctNetworkListener.onCallError(error);
-                    }
-
+    /* response method */
+    private  Response.Listener<JSONObject> getOjectResponceSuccessListener(final ObejctNetworkListener obejctNetworkListener) {
+        return new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                if (obejctNetworkListener != null) try {
+                    obejctNetworkListener.onCallSuccess(response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-        ) {
+            }
+        };
+    }
+
+    private  Response.ErrorListener getObjectResponceErrorListener(final ObejctNetworkListener obejctNetworkListener) {
+        return new Response.ErrorListener() {
 
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("token", mAuthToken);
-                return params;
+            public void onErrorResponse(VolleyError error) {
+                if (obejctNetworkListener != null) obejctNetworkListener.onCallError(error);
             }
-
         };
-        mRequestQueue.add(request);
     }
 
-    public void arrayRequestServer(final ArrayNetworkListener arrayNetworkListener, int method, String url) {
-        if (!TextUtils.isEmpty(mAuthToken)) {
-            arrayRequestServerWithToken(arrayNetworkListener, method, url);
-            return;
-        }
-        JsonArrayRequest request = new JsonArrayRequest(method, url,
-                new Response.Listener<JSONArray>() {
-
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        if (arrayNetworkListener != null) try {
-                            arrayNetworkListener.onCallSuccess(response);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if (arrayNetworkListener != null) arrayNetworkListener.onCallError(error);
-                    }
-
-                });
-        mRequestQueue.add(request);
+    private  Response.Listener<JSONArray> getArrayResponceSuccessListener(final ArrayNetworkListener arrayNetworkListener) {
+        return new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                if (arrayNetworkListener != null) try {
+                    arrayNetworkListener.onCallSuccess(response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
     }
 
-    private void arrayRequestServerWithToken(final ArrayNetworkListener arrayNetworkListener,
-                                             int method,
-                                             String url) {
-        url = url + "?token=" + mAuthToken;
-        JsonArrayRequest request = new JsonArrayRequest(method, url,
-                new Response.Listener<JSONArray>() {
+    private  Response.ErrorListener getArrayResponceErrorListener(final ArrayNetworkListener arrayNetworkListener) {
+        return new Response.ErrorListener() {
 
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        if (arrayNetworkListener != null) try {
-                            arrayNetworkListener.onCallSuccess(response);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if (arrayNetworkListener != null) arrayNetworkListener.onCallError(error);
-                    }
-
-                });
-        mRequestQueue.add(request);
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (arrayNetworkListener != null) arrayNetworkListener.onCallError(error);
+            }
+        };
     }
+
 }

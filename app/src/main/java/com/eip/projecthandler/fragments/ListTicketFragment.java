@@ -125,7 +125,7 @@ public class ListTicketFragment extends com.blunderer.materialdesignlibrary.frag
             else if (projectId != null && !this.onlyUserTicket)
                 url = ApiRoutes.TICKET_GET_BY_PROJECT(this.projectId);
             else
-               url = ApiRoutes.TICKET_GET_BY_USER;
+                url = ApiRoutes.TICKET_GET_BY_USER;
 
             NetworkHelper networkHelper = NetworkHelper.getInstance(getActivity());
             networkHelper.retrieveToken(getActivity());
@@ -148,11 +148,10 @@ public class ListTicketFragment extends com.blunderer.materialdesignlibrary.frag
                     Log.d("ListTicketFragment", "requestServer 42 Error: " + error);
                     error.printStackTrace();
                 }
-            }, Request.Method.GET, url);
+            }, Request.Method.GET, url, null);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }

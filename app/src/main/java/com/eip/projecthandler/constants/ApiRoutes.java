@@ -36,5 +36,7 @@ public class ApiRoutes {
     public static final String TICKET_GET_BY_PROJECT(long projectId) {return SERVER() + "/ticket/allByProject/"+projectId;}
     public static final String TICKET_GET_BY_USER = SERVER() + "/ticket/allByCurrentUser";
     public static final String TICKET_GET_BY_PROJECT_AND_USER(long projectId) {return SERVER() + "/ticket/allByProjectAndUser/" + projectId;}
+    public static final String TICKET_SAVE_NEW_TICKET_MESSAGE(Long ticketId) {return SERVER() + "/ticket/saveNewTicketMessage/" + ticketId;};
+    public static final String TICKET_GET_DATA_FOR_NEW_TICKET = SERVER() + "/ticket/dataForNewTicket";
 
 }

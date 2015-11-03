@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/fragment_listview_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/listViewTickets"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </LinearLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_add_new_ticket"
+        android:padding="5dip"
+        android:layout_margin="5dip"
+        android:layout_gravity="right|bottom"
+        android:src="@drawable/ic_ph_plus_circle"
+        android:background="@android:color/transparent"
+        android:longClickable="true"
+        android:clickable="true"/>
+</FrameLayout>

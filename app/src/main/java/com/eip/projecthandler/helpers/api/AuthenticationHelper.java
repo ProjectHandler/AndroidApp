@@ -49,7 +49,7 @@ public final class AuthenticationHelper {
                 logInListener.onAuthenticationError(code.toString());
             }
 
-        }, Request.Method.GET, ApiRoutes.authentication(emailAddress, password));
+        }, Request.Method.GET, ApiRoutes.authentication(emailAddress, password), null);
     }
 
     /**

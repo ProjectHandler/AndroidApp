@@ -147,7 +147,7 @@ public class CustomAdapterSubTask  extends BaseAdapter {
                 public void onCallError(VolleyError error) {
                     Toast.makeText(context.getApplicationContext(), R.string.save_error, Toast.LENGTH_LONG).show();
                 }
-            }, Request.Method.GET, url);
+            }, Request.Method.GET, url, null);
 
         } catch (Exception e) {
             e.printStackTrace();

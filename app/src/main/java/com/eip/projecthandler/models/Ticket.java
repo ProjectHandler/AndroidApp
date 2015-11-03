@@ -86,6 +86,10 @@ public class Ticket {
         this.ticketMessage = ticketMessage;
     }
 
+    public void addTicketMessage(TicketMessage ticketMessage) {
+        this.ticketMessage.add(ticketMessage);
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }
