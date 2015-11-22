@@ -1,5 +1,6 @@
 package com.eip.projecthandler.helpers.api;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.android.volley.Request;
@@ -49,7 +50,7 @@ public final class AuthenticationHelper {
                 logInListener.onAuthenticationError(code.toString());
             }
 
-        }, Request.Method.GET, ApiRoutes.authentication(emailAddress, password), null);
+        }, Request.Method.GET, ApiRoutes.authentication(emailAddress, password, (Activity) context), null);
     }
 
     /**

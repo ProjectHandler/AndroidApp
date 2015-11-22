@@ -23,6 +23,7 @@
     <string name="button_my_tasks">My tasks</string>
     <string name="button_tickets">Tickets</string>
     <string name="button_my_tickets">My Tickets</string>
+    <string name="button_create">Create</string>
 
     <!-- label -->
     <string name="label_progress">progress: </string>
@@ -33,6 +34,13 @@
     <string name="label_sub_tasks">Sub Tasks</string>
     <string name="label_take_task">take task</string>
     <string name="label_finished_task">finished task</string>
+    <string name="label_priority">Priority:</string>
+    <string name="label_tracker">Tracker:</string>
+    <string name="label_title">Title:</string>
+    <string name="label_project">Project:</string>
+    <string name="label_users">Users:</string>
+    <string name="label_message">Message:</string>
+    <string name="label_new_task">Create New Ticket</string>
 
     <!-- text example -->
     <string name="name_example">Example name</string>

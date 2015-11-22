@@ -4,6 +4,7 @@ import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -107,6 +108,13 @@ public class LogInActivity extends AccountAuthenticatorActivity implements LogIn
         authenticate(emailAddress, password);
     }
 
+    public void onSettingsClick(View view) {
+        Log.d("LogInActivity", " settings click ");
+
+        Intent intent = new Intent(LogInActivity.this, SettingsActivity.class);
+        intent.putExtra("count", 42);
+        startActivityForResult(intent, 16);
+    }
     /**
      * Try to authenticate the user by getting the account already created.
      * If no accounts were found, we show the form so that the user can log in.

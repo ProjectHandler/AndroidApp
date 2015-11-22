@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewManager;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -69,13 +68,13 @@ public class TaskFragment extends Fragment {
                 ((ViewManager) entry.getParent()).removeView(entry);
             }
 
-            ImageButton add = (ImageButton) view.findViewById(R.id.imageButton);
+            /*ImageButton add = (ImageButton) view.findViewById(R.id.imageButton);
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                 }
-            });
+            });*/
 
         }
 

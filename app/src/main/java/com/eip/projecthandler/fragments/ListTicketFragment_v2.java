@@ -92,11 +92,9 @@ public class ListTicketFragment_v2  extends Fragment {
         lv_tickets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                onItemClick(adapterView, view, position, id);
+                openExistingTicket(adapterView, position);
             }
         });
-
-
 
         ImageButton addTicket = (ImageButton) view.findViewById(R.id.btn_add_new_ticket);
         addTicket.setOnClickListener(new View.OnClickListener() {
@@ -127,13 +125,13 @@ public class ListTicketFragment_v2  extends Fragment {
 
     private void getListOfTicket() {
         try {
-            String url = ApiRoutes.TICKET_GET_BY_USER;
+            String url;
             if (projectId != null && this.onlyUserTicket)
-                url = ApiRoutes.TICKET_GET_BY_PROJECT_AND_USER(this.projectId);
+                url = ApiRoutes.TICKET_GET_BY_PROJECT_AND_USER(this.getActivity(), this.projectId);
             else if (projectId != null && !this.onlyUserTicket)
-                url = ApiRoutes.TICKET_GET_BY_PROJECT(this.projectId);
+                url = ApiRoutes.TICKET_GET_BY_PROJECT(this.getActivity(), this.projectId);
             else
-                url = ApiRoutes.TICKET_GET_BY_USER;
+                url = ApiRoutes.TICKET_GET_BY_USER(this.getActivity());
 
             NetworkHelper networkHelper = NetworkHelper.getInstance(getActivity());
             networkHelper.retrieveToken(getActivity());
@@ -163,7 +161,7 @@ public class ListTicketFragment_v2  extends Fragment {
         }
     }
 
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+    private void openExistingTicket(AdapterView<?> adapterView, int position) {
         TicketFragment ticketFragment = TicketFragment.newInstance((Ticket) adapterView.getItemAtPosition(position));
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

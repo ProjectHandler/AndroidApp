@@ -119,13 +119,13 @@ public class ListTicketFragment extends com.blunderer.materialdesignlibrary.frag
 
     private void getListOfTicket() {
         try {
-            String url = ApiRoutes.TICKET_GET_BY_USER;
+            String url;
             if (projectId != null && this.onlyUserTicket)
-                url = ApiRoutes.TICKET_GET_BY_PROJECT_AND_USER(this.projectId);
+                url = ApiRoutes.TICKET_GET_BY_PROJECT_AND_USER(this.getActivity(), this.projectId);
             else if (projectId != null && !this.onlyUserTicket)
-                url = ApiRoutes.TICKET_GET_BY_PROJECT(this.projectId);
+                url = ApiRoutes.TICKET_GET_BY_PROJECT(this.getActivity(), this.projectId);
             else
-                url = ApiRoutes.TICKET_GET_BY_USER;
+                url = ApiRoutes.TICKET_GET_BY_USER(this.getActivity());
 
             NetworkHelper networkHelper = NetworkHelper.getInstance(getActivity());
             networkHelper.retrieveToken(getActivity());

@@ -134,7 +134,7 @@ public class CustomAdapterSubTask  extends BaseAdapter {
 
     private void saveSubTaskChanged(SubTask subTask) {
         try {
-            String url = ApiRoutes.TASK_UPDATE_SUBTASK_STATUS(subTask);
+            String url = ApiRoutes.TASK_UPDATE_SUBTASK_STATUS((Activity) this.context, subTask);
             NetworkHelper networkHelper = NetworkHelper.getInstance(context.getApplicationContext());
             networkHelper.retrieveToken(context.getApplicationContext());
             networkHelper.objectRequestServer(new ObejctNetworkListener() {

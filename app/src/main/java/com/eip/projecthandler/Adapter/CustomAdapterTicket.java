@@ -96,10 +96,10 @@ public class CustomAdapterTicket extends BaseAdapter {
             holder.status.setText(row_pos.getTicketStatus().getValue());
 
         Log.d("CustomAdapterTicket", "row_pos.getTicketPriority(): " + row_pos.getTicketPriority());
-        //if (row_pos.getTicketPriority() == null)
+        if (row_pos.getTicketPriority() == null)
             holder.priority.setText("Medium");
-        //else
-        //    holder.priority.setText(row_pos.getTicketPriority().getValue());
+        else
+            holder.priority.setText(row_pos.getTicketPriority().getName());
 
         holder.updatedAt.setText(util.getDateString(context, row_pos.getUpdatedAt()));
 

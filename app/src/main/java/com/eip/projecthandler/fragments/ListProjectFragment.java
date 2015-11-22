@@ -105,6 +105,7 @@ public class ListProjectFragment extends com.blunderer.materialdesignlibrary.fra
                         listProject.add(project);
                     }
                     projectAdapter.notifyDataSetChanged();
+
                 }
 
                 @Override
@@ -112,7 +113,7 @@ public class ListProjectFragment extends com.blunderer.materialdesignlibrary.fra
                     Log.d("ListProjectFragment", "requestServer Error: " + error);
                     error.printStackTrace();
                 }
-            }, Request.Method.GET, ApiRoutes.PROJECT_GET_BY_USER, null);
+            }, Request.Method.GET, ApiRoutes.PROJECT_GET_BY_USER(this.getActivity()), null);
 
         } catch (Exception e) {
             e.printStackTrace();

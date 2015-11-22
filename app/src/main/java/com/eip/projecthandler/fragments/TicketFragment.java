@@ -65,9 +65,9 @@ public class TicketFragment extends Fragment {
             send.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   EditText msg = (EditText) view.findViewById(R.id.messageTextToSend);
-                    addNewMessage(msg.getText().toString());
-                    msg.setText("");
+                EditText msg = (EditText) view.findViewById(R.id.messageTextToSend);
+                addNewMessage(msg.getText().toString());
+                msg.setText("");
                 }
             });
 
@@ -92,7 +92,7 @@ public class TicketFragment extends Fragment {
 
     private void saveTicketMessage(TicketMessage ticketMessage) {
         try {
-            String url = ApiRoutes.TICKET_SAVE_NEW_TICKET_MESSAGE(this.ticket.getId());
+            String url = ApiRoutes.TICKET_SAVE_NEW_TICKET_MESSAGE(this.getActivity(), this.ticket.getId());
             NetworkHelper networkHelper = NetworkHelper.getInstance(getActivity().getApplicationContext());
             networkHelper.retrieveToken(getActivity().getApplicationContext());
             networkHelper.objectRequestServer(new ObejctNetworkListener() {
